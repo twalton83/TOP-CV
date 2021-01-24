@@ -18,17 +18,25 @@ padding: 1rem;
 
 export default function MyDocument() {
   const [personalInfo, setPersonalInfo] = useState({
-    name: "",
-    title: "",
-    pitch: ""
+    name: "John Doe",
+    title: "Professional Title",
+    pitch: "A short and engaging pitch about yourself."
   });
   const [contactInfo, setContactInfo] = useState([]);
   const [workExperience, setWorkExperience] = useState([]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
+
+  const handlePersonalInput = (e) => {
+    setPersonalInfo({
+      ...personalInfo,
+      [e.target.id] : e.target.textContent
+    })
+  }
+  
   return (
     <ResumeSheet>
-      <ResumeHeader personalInfo = { personalInfo }/>
+      <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact/>
 
     </ResumeSheet>

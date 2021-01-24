@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 const Header = styled.section`
 width: 100%;
@@ -13,20 +13,38 @@ cursor: text;
 outline: none;
 };
 `
-export default function ResumeHeader( { bgcolor, color, personalInfo }) {
+export default function ResumeHeader( { bgcolor, color, personalInfo, handlePersonalInput }) {
   const { name, title, pitch } = personalInfo
+  const [display, setDisplay] = useState({
+    name: "block",
+    title: "block",
+    pitch: "block"
+  });
 
   const handleClick = (e) => {
-    e.target.contentEditable = true;
+    setDisplay({
+      ...display, 
+      [e.target.id] : false
+    })
   }
-  
+
+
+
   return (
-    <Header bgcolor = { bgcolor } color = { color }>
-      <h2 onClick = { handleClick } className="header-content">{ name !== "" ? name : 'John Doe' }</h2>
-      <h2 onClick = { handleClick } className="header-content"> { title !== "" ? title : 'Professional Title' }</h2>
-      <p onClick = { handleClick } className="header-content">
-      { pitch !== "" ? pitch : 'A short engaging pitch about yourself.' }
+    <Header bgcolor = { bgcolor } color = { color } >
+      <h2 id="name" display= {display.name} className="header-content">{ name }</h2>
+      <input display= {!display.name} htmlFor="name" type="text"/>
+
+      <h2 id="title" display= {display.title} className="header-content">{ title }</h2>
+      <input display= {!display.title} htmlFor="title" type="text"/>
+
+      <p id ="pitch" 
+      display= {display.name}
+      className="header-content">
+        { pitch }
       </p>
+      <input display= {!display.pitch} htmlFor="pitch" type="text"/>
+
     </Header>
   )
 }
