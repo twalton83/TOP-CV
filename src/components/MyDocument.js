@@ -30,7 +30,7 @@ export default function MyDocument() {
   const handlePersonalInput = (e) => {
     setPersonalInfo({
       ...personalInfo,
-      [e.target.id] : e.target.textContent
+      [e.target.dataset.id] : e.target.value
     })
   }
   
