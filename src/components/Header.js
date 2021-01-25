@@ -1,14 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
+import {ReactComponent as Logo} from './logo.svg';
 
 const Navbar = styled.header`
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
-width: 100%;
+width: auto;
 height: 10vh;
 background-color : ${props => props.bgcolor};
+padding-left: 1rem;
+
+h1 {
+  color: white; 
+}
+
+svg {
+  fill: white;
+  margin-left: .5rem;
+}
 `
 
 export default function Header() {
@@ -17,6 +28,7 @@ export default function Header() {
       <h1>
         My.CV
       </h1>
+      <Logo/>
     </Navbar> 
   )
 }

@@ -8,7 +8,7 @@ display: grid;
 grid-template-rows: 20% 20% auto;
 min-height: 80vh;
 max-height: 3300px;
-max-width: 2550;
+max-width: 2550px;
 height: auto;
 width: 70vw;
 border: 1px solid black;
@@ -32,6 +32,10 @@ export default function MyDocument() {
       ...personalInfo,
       [e.target.dataset.id] : e.target.value
     })
+  }
+
+  const handleContactInfo = (e) => {
+    setContactInfo([...contactInfo, {[e.target.name] : e.target.value} ])
   }
   
   return (

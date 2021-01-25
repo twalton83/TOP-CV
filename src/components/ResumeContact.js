@@ -5,14 +5,15 @@ const Section = styled.section`
 display: grid;
 grid-template-columns: ${props => props.cols};
 grid-template-rows: ${props => props.rows};
-border: 1px solid red;
+border-top: 2px solid ${props => props.color};
+border-bottom: 2px solid ${props => props.color};
 `
 
 export default function ResumeContact( { contactItems }) {
 
 
   return (
-    <Section>
+    <Section >
       <p>Email</p>
     </Section>
   )
