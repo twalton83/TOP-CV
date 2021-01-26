@@ -26,6 +26,7 @@ export default function MyDocument() {
   const [workExperience, setWorkExperience] = useState([]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
   const handlePersonalInput = (e) => {
     setPersonalInfo({
@@ -38,10 +39,14 @@ export default function MyDocument() {
     setContactInfo([...contactInfo, {[e.target.name] : e.target.value} ])
   }
   
+  const handleModalShow = (e) => {
+    setModalShow(!modalShow)
+  }
+  
   return (
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
-      <ResumeContact/>
+      <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } />
 
     </ResumeSheet>
   )
