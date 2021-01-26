@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import {ReactComponent as Email} from '../assets/email-24px.svg';
 import {ReactComponent as Phone} from '../assets/smartphone-24px.svg';
@@ -18,41 +18,151 @@ left: 0;
 `
 
 const Dialog = styled.div`
-width: 40%;
-height: 30%;
+width: 60%;
+height: 40%;
 background-color: #394554;
 color: white;
 margin: 0 auto;
 margin-top: 20%;
 display: grid; 
+grid-template-rows: 1fr 1fr 2fr 1fr;
+border-radius: 20px;
 
+svg {
+  fill: white;
+}
+
+input {
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  height: 1.2rem;
+  font-size: 1.2rem;
+  color: white;
+  &:focus{
+    border-bottom: 1px solid #1CBFAF;
+  }
+  ::placeholder {
+    font-size: 1.2rem;
+  }
+}
 `
 
-export default function ContactModal( { handleContactForm, handleModal }) {
+const LeftTabButton = styled.button`
+border-radius: 5px 0px 0px 5px;
+background-color: ${props => props.active ? "#1CBFAF" : "inherit"};
+color: white;
+&:hover{
+  background-color: #1CBFAF;
+}
+width: 150px;
+height: 40px;
+font-size: 1rem;
+border: 1px solid #1CBFAF;
+outline: none;
+font-weight: 600;
+`
 
-  
+const RightTabButton = styled.button`
+border-radius: 0px 5px 5px 0px;
+background-color: ${props => props.active ? "#1CBFAF" : "inherit"};
+color: white;
+&:hover{
+  background-color: #1CBFAF;
+}
+width: 150px;
+height: 40px;
+font-size: 1rem;
+border: 1px solid #1CBFAF;
+outline: none;
+font-weight: 600;
+`
+
+const InputContainer = styled.div`
+display: grid;
+grid-template-columns: 50% 50%;
+
+input {
+  width: 75%;
+}
+`
+
+const SaveButton = styled.button`
+width: 100px;
+height: 40px;
+background-color: #1CBFAF;
+border-radius: 30px;
+border: none;
+margin-left: 85%;
+color: white;
+font-weight: 600;
+font-size: 1.1rem;
+`
+
+export default function ContactModal( { contactInfo, handleContactInfo, handleModal }) {
+  const [showGeneralContact, setShowGeneralContact] = useState(true);
+  const { email, city, address, phone, website} = contactInfo
   return (
-    <Modal onClick = { handleModal }>
+    <Modal>
       <Dialog>
         <h2>
           Contact Information
         </h2>
-        <label htmlFor="email">
-          <Email/>
-          <input type="email" name="email" id="email"/>
-        </label>
-        <label htmlFor="phone">
-          <Phone/>
-          <input type="phone" name="phone" id="phone"/>
-        </label>
-        <label htmlFor="city">
-          <City/>
-          <input type="text" name="city" id="city"/>
-        </label>
-        <label htmlFor="address">
-          <Address/>
-          <input type="text" name="address" id="address"/>
-        </label>
+        <div>
+          <LeftTabButton active = {showGeneralContact} onClick={()=> setShowGeneralContact(true)}> 
+            Main Contact 
+          </LeftTabButton>
+          <RightTabButton active = {!showGeneralContact} onClick={()=> setShowGeneralContact(false)}>
+            Social
+          </RightTabButton>
+        </div>
+
+        { showGeneralContact && 
+        <InputContainer>
+          <label htmlFor="email">
+            <Email/>
+            <input value = { email } type="email" name="email" id="email" placeholder="Email" onChange = { handleContactInfo } />
+          </label>
+          <label htmlFor="phone">
+            <Phone/>
+            <input value = { phone } type="phone" name="phone" id="phone" placeholder="Phone" onChange = { handleContactInfo }/>
+          </label>
+          <label htmlFor="city">
+            <City/>
+            <input type="text" value = { city } name="city" id="city" placeholder="City" onChange = { handleContactInfo }/>
+          </label>
+          <label htmlFor="address">
+            <Address/>
+            <input value = { address } type="text" name="address" id="address" placeholder="Street Address"
+            onChange = { handleContactInfo }/>
+          </label>
+        </InputContainer>
+        }
+
+        {
+          !showGeneralContact &&
+          <InputContainer>
+          <label htmlFor="website">
+            <Website/>
+            <input type="text"  value = { website } name="website" id="website" placeholder="Website" onChange = { handleContactInfo } />
+          </label>
+          <label htmlFor="github">
+            <Phone/>
+            <input type="text" name="github" id="github"  onChange = { handleContactInfo }/>
+          </label>
+          <label htmlFor="city">
+            <City/>
+            <input type="text" name="linkedin" id="linkedin"  onChange = { handleContactInfo }/>
+          </label>
+          <label htmlFor="stack">
+            <Address/>
+            <input type="text" name="stack" id="stack"
+            onChange = { handleContactInfo }/>
+          </label>
+        </InputContainer>
+        }
+        <SaveButton onClick = { handleModal }> Save </SaveButton>
       </Dialog>
     </Modal>
   )

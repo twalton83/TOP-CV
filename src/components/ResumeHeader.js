@@ -32,7 +32,7 @@ const Input = styled.input`
   margin : .5rem;
   outline: none;
   border: none;
-  border-bottom: 2px solid navy;
+  border-bottom: 1px solid navy;
   &[data-id="name"] {
     font-size: 2rem;
   };
@@ -76,12 +76,12 @@ export default function ResumeHeader( { bgcolor, color, personalInfo, handlePers
 
       {!display.name && <Input     
       autoFocus
-      onFocus={e => e.currentTarget.select()} data-id="name" value = {name} onChange = { handlePersonalInput } onBlur = { handleBlur } htmlFor="name" type="text"/>
+      onFocus={e => e.currentTarget.select()} data-id="name" value = {name} onChange = { handlePersonalInput } onBlur = { handleBlur } htmlFor="name" type="text" size= { name.length } maxLength = { 60 } />
     }
 
       <HeaderContent onClick = {handleClick} id="title" display= {display.title.toString()} className="header-content">{ title }</HeaderContent>
       {!display.title && 
-        <Input autoFocus data-id="title" value = {title} onChange = { handlePersonalInput } onBlur = { handleBlur } htmlFor="title" type="text"/>
+        <Input autoFocus data-id="title" value = {title} onChange = { handlePersonalInput } onBlur = { handleBlur } size={ title.length } maxLength = { 75 } htmlFor="title" type="text"/>
       }
       <HeaderContent onClick = {handleClick} id ="pitch" 
       display= {display.pitch.toString()}

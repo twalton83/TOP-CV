@@ -22,7 +22,16 @@ export default function MyDocument() {
     title: "Professional Title",
     pitch: "A short and engaging pitch about yourself."
   });
-  const [contactInfo, setContactInfo] = useState([]);
+  const [contactInfo, setContactInfo] = useState({
+    email: "",
+    city: "",
+    address: "",
+    phone: "",
+    website: "",
+    stack :"",
+    linkedin: "",
+    github: ""
+  });
   const [workExperience, setWorkExperience] = useState([]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -36,7 +45,10 @@ export default function MyDocument() {
   }
 
   const handleContactInfo = (e) => {
-    setContactInfo([...contactInfo, {[e.target.name] : e.target.value} ])
+    console.log(e.target.value, e.target.name)
+    setContactInfo({...contactInfo, 
+      [e.target.name] : e.target.value
+    })
   }
   
   const handleModalShow = (e) => {
@@ -46,7 +58,7 @@ export default function MyDocument() {
   return (
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
-      <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } />
+      <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
 
     </ResumeSheet>
   )

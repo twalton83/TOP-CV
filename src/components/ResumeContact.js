@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import ContactModal from './ContactModal';
 
@@ -15,13 +15,14 @@ p{
 }
 `
 
-export default function ResumeContact( { displayModal, contactItems, handleModal }) {
-
+export default function ResumeContact( { displayModal, contactItems, handleModal, handleContactInfo }) {
+  const [noItems, setNoItems] = useState(Object.values(contactItems).every(v => v === ""));
 
   return (
     <Section >
-      { contactItems.length === 0 && <p onClick= { handleModal }> Click to start adding contacts!</p>}
-      { displayModal && <ContactModal handleModal= { handleModal }/> }
+      { noItems && <p onClick= { handleModal }> Click to start adding contacts!</p>}
+
+      { displayModal && <ContactModal contactInfo = { contactItems } handleContactInfo = { handleContactInfo } handleModal= { handleModal }/> }
     </Section>
   )
 }
