@@ -1,5 +1,5 @@
 import './App.css';
-import {FlexWrapper} from './components/FlexWrapper'
+import { FlexWrapper } from './components/StyledUtils'
 import Header from './components/Header'
 import MyDocument from './components/MyDocument';
 function App() {

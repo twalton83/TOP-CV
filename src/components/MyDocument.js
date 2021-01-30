@@ -2,18 +2,21 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import ResumeHeader from './ResumeHeader';
 import ResumeContact from './ResumeContact';
+import ResumeBody from './ResumeBody';
+
 
 const ResumeSheet = styled.section`
-display: grid;
-grid-template-rows: 20% 20% auto;
+display: flex;
+flex-direction: column;
 min-height: 80vh;
 max-height: 3300px;
 max-width: 2550px;
-height: auto;
+height: 90vh;
 width: 70vw;
 border: 1px solid black;
 background-color: white;
 padding: 1rem;
+margin-bottom: 2rem;
 `
 
 export default function MyDocument() {
@@ -24,15 +27,18 @@ export default function MyDocument() {
   });
   const [contactInfo, setContactInfo] = useState({
     email: "",
-    city: "",
+    country:  "",
+    city:  "",
     address: "",
     phone: "",
     website: "",
-    stack :"",
+    stack : "",
     linkedin: "",
     github: ""
   });
+
   const [workExperience, setWorkExperience] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -45,7 +51,7 @@ export default function MyDocument() {
   }
 
   const handleContactInfo = (e) => {
-    console.log(e.target.value, e.target.name)
+    const contact = contactInfo[e.target.name]
     setContactInfo({...contactInfo, 
       [e.target.name] : e.target.value
     })
@@ -59,6 +65,7 @@ export default function MyDocument() {
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
+      <ResumeBody skills = { skills }  />
 
     </ResumeSheet>
   )

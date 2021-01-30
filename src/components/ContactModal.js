@@ -4,13 +4,20 @@ import {ReactComponent as Email} from '../assets/email-24px.svg';
 import {ReactComponent as Phone} from '../assets/smartphone-24px.svg';
 import {ReactComponent as Address} from '../assets/location_on-24px.svg';
 import {ReactComponent as Website} from '../assets/language-24px.svg';
+import {ReactComponent as Country} from '../assets/flag-24px.svg';
 import {ReactComponent as City} from '../assets/domain-24px.svg';
+import {ReactComponent as LinkedIn} from '../assets/linkedin.svg';
+import {ReactComponent as StackOverflow} from '../assets/stack-overflow.svg';
+import {ReactComponent as Github} from '../assets/github-logo.svg';
+
+
 
 
 const Modal = styled.div`
 z-index: 10;
 width: 100vw;
-height: 100vh;
+height: 100%;
+min-height: 107vh;
 background-color: rgba(0,0,0,.5);
 position: absolute;
 top: 0;
@@ -30,6 +37,8 @@ border-radius: 20px;
 
 svg {
   fill: white;
+  height: 24px;
+  width: auto;
 }
 
 input {
@@ -102,7 +111,7 @@ font-size: 1.1rem;
 
 export default function ContactModal( { contactInfo, handleContactInfo, handleModal }) {
   const [showGeneralContact, setShowGeneralContact] = useState(true);
-  const { email, city, address, phone, website} = contactInfo
+  const { email, country, city, address, phone, website, github, stack, linkedin} = contactInfo
   return (
     <Modal>
       <Dialog>
@@ -122,19 +131,24 @@ export default function ContactModal( { contactInfo, handleContactInfo, handleMo
         <InputContainer>
           <label htmlFor="email">
             <Email/>
-            <input value = { email } type="email" name="email" id="email" placeholder="Email" onChange = { handleContactInfo } />
+            <input value = { email.value } type="email" name="email" id="email" placeholder="Email" onChange = { handleContactInfo } />
           </label>
           <label htmlFor="phone">
             <Phone/>
-            <input value = { phone } type="phone" name="phone" id="phone" placeholder="Phone" onChange = { handleContactInfo }/>
+            <input value = { phone.value } type="phone" name="phone" id="phone" placeholder="Phone" onChange = { handleContactInfo }/>
+          </label>
+          <label htmlFor="address">
+            <Country/>
+            <input value = { country.value } type="text" name="country" id="country" placeholder="Country"
+            onChange = { handleContactInfo }/>
           </label>
           <label htmlFor="city">
             <City/>
-            <input type="text" value = { city } name="city" id="city" placeholder="City" onChange = { handleContactInfo }/>
+            <input type="text" value = { city.value } name="city" id="city" placeholder="City" onChange = { handleContactInfo }/>
           </label>
           <label htmlFor="address">
             <Address/>
-            <input value = { address } type="text" name="address" id="address" placeholder="Street Address"
+            <input value = { address.value } type="text" name="address" id="address" placeholder="Street Address"
             onChange = { handleContactInfo }/>
           </label>
         </InputContainer>
@@ -145,19 +159,19 @@ export default function ContactModal( { contactInfo, handleContactInfo, handleMo
           <InputContainer>
           <label htmlFor="website">
             <Website/>
-            <input type="text"  value = { website } name="website" id="website" placeholder="Website" onChange = { handleContactInfo } />
+            <input type="text"  value = { website.value } name="website" id="website" placeholder="Website" onChange = { handleContactInfo } />
           </label>
           <label htmlFor="github">
-            <Phone/>
-            <input type="text" name="github" id="github"  onChange = { handleContactInfo }/>
+            <Github/>
+            <input type="text" value = { github.value } name="github" id="github" placeholder="Github" onChange = { handleContactInfo }/>
           </label>
           <label htmlFor="city">
-            <City/>
-            <input type="text" name="linkedin" id="linkedin"  onChange = { handleContactInfo }/>
+            <LinkedIn/>
+            <input type="text" value = { linkedin.value } name="linkedin" id="linkedin"  placeholder="LinkedIn" onChange = { handleContactInfo }/>
           </label>
           <label htmlFor="stack">
-            <Address/>
-            <input type="text" name="stack" id="stack"
+            <StackOverflow/>
+            <input type="text" value = { stack.value } name="stack" id="stack" placeholder="Stack Overflow"
             onChange = { handleContactInfo }/>
           </label>
         </InputContainer>
