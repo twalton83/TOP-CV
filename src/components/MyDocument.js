@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import ResumeHeader from './ResumeHeader';
 import ResumeContact from './ResumeContact';
+import ResumeBody from './ResumeBody';
+
 
 const ResumeSheet = styled.section`
 display: flex;
@@ -24,45 +26,19 @@ export default function MyDocument() {
     pitch: "A short and engaging pitch about yourself."
   });
   const [contactInfo, setContactInfo] = useState({
-    email: {
-      image: "../assets/email-24px.svg",
-      value: ""
-    },
-    country: {
-      image: "../assets/flag-24px.svg",
-      value: ""
-    },
-    city: {
-      image: "../assets/domain-24px.svg",
-      value: ""
-    },
-    address: {
-    image:"../assets/location_on-24px.svg",
-    value: ""
-    },
-    phone: {
-      image: "../assets/smartphone-24px.svg",
-      value: ""
-    },
-    website: {
-      image: "../assets/language-24px.svg",
-      value: ""
-    },
-    stack : {
-      image: "../assets/stack-overflow.svg",
-      value: ""
-    },
-    linkedin: {
-      image: "../assets/linkedin.svg",
-      value: ""
-    },
-    github: {
-      image: "../assets/github-logo.svg",
-      value: ""
-    }
+    email: "",
+    country:  "",
+    city:  "",
+    address: "",
+    phone: "",
+    website: "",
+    stack : "",
+    linkedin: "",
+    github: ""
   });
 
   const [workExperience, setWorkExperience] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -77,7 +53,7 @@ export default function MyDocument() {
   const handleContactInfo = (e) => {
     const contact = contactInfo[e.target.name]
     setContactInfo({...contactInfo, 
-      [e.target.name] : { ...contact, value : e.target.value}
+      [e.target.name] : e.target.value
     })
   }
   
@@ -89,6 +65,7 @@ export default function MyDocument() {
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
+      <ResumeBody skills = { skills }  />
 
     </ResumeSheet>
   )

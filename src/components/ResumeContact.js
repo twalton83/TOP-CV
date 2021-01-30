@@ -6,6 +6,7 @@ import ContactItemList from './ContactItemList';
 const Section = styled.section`
 display: grid;
 height: auto;
+min-height: 10%;
 grid-template-columns: ${props => props.cols};
 grid-template-rows: ${props => props.rows};
 border-top: 2px solid ${props => props.color};
@@ -16,9 +17,9 @@ const Button = styled.button`
   background-color: grey;
   color: white;
   height: 2.5rem;
-  width: 5rem;
+  width: 8rem;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: none;
   border-radius: 20px;
   font-weight: 600;
@@ -28,7 +29,7 @@ export default function ResumeContact( { displayModal, contactItems, handleModal
   const [noItems, setNoItems] = useState(null);
 
   useEffect(() => {
-    setNoItems(Object.values(contactItems).every(item => item.value === ""))
+    setNoItems(Object.values(contactItems).every(i => i === ""))
   }, [contactItems])
 
   return (

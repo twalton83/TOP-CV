@@ -29,6 +29,7 @@ height: auto;
 svg {
   height: 24px;
   width: auto;
+  margin-right: .5rem;
 }
 `
 
@@ -48,10 +49,10 @@ export default function ContactItemList({ items, handleModal }) {
   const generateItems = () => {
     const arr = []
     for(const item in items){
-      if(items[item].value !== ""){
+      if(items[item] !== ""){
         arr.push({
           svg: icons[`${item}`],
-          value: items[item].value
+          value: items[item]
         })
       }
     }
@@ -60,7 +61,7 @@ export default function ContactItemList({ items, handleModal }) {
   return (
     <List>
       { generateItems().map(item => (
-        <ContactItem onClick={ handleModal }>
+        <ContactItem onClick={ handleModal } key={item.value}>
           { item.svg }
           <p>
             { item.value }
