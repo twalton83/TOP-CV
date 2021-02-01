@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
+import { Button, Header } from './StyledUtils';
 
-export default function WorkExperience() {
+export default function WorkExperience({ workExperience }) {
   return (
     <div>
-      <p>Work Experience</p>
+      <Header color="#284B63">WORK EXPERIENCE</Header>
+      { !workExperience.length && <Button>ADD AN EXPERIENCE</Button> }
+      
     </div>
   )
 }

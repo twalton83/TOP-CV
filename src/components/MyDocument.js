@@ -11,7 +11,7 @@ flex-direction: column;
 min-height: 80vh;
 max-height: 3300px;
 max-width: 2550px;
-height: 90vh;
+height: 100vh;
 width: 70vw;
 border: 1px solid black;
 background-color: white;
@@ -35,6 +35,12 @@ export default function MyDocument() {
     stack : "",
     linkedin: "",
     github: ""
+  });
+  const [sectionDisplay, setSectionDisplay] = useState({
+    work: true,
+    skills: true,
+    projects: true,
+    education: true
   });
 
   const [workExperience, setWorkExperience] = useState([]);
@@ -65,7 +71,7 @@ export default function MyDocument() {
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
-      <ResumeBody skills = { skills }  />
+      <ResumeBody skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
 
     </ResumeSheet>
   )
