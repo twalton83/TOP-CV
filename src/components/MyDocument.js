@@ -48,6 +48,7 @@ export default function MyDocument() {
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [workModalShow, setWorkModalShow] = useState(false);
 
   const handlePersonalInput = (e) => {
     setPersonalInfo({
@@ -66,12 +67,17 @@ export default function MyDocument() {
   const handleModalShow = (e) => {
     setModalShow(!modalShow)
   }
+
+  const handleWorkModal = (e) => {
+    setWorkModalShow(!workModalShow)
+  }
+  
   
   return (
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
-      <ResumeBody skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
+      <ResumeBody displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
 
     </ResumeSheet>
   )

@@ -11,10 +11,10 @@ display: grid;
 grid-template-columns: 50% 50%;
 `
 
-export default function ResumeBody({ skills, workExperience, education, projects, sectionDisplay }) {
+export default function ResumeBody({ skills, workExperience, education, projects, sectionDisplay, displayWorkModal, handleModal }) {
   return (
     <Container>
-      { sectionDisplay.work && <WorkExperience workExperience = { workExperience }/> } 
+      { sectionDisplay.work && <WorkExperience displayModal = { displayWorkModal } handleModal = { handleModal } workExperience = { workExperience }/> } 
       { sectionDisplay.skills && <Skills skills={ skills } /> }
       { sectionDisplay.education && <Education education = { education } /> }
       { sectionDisplay.projects && <Projects projects = { projects } /> }
