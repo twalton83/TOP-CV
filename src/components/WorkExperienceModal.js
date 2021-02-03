@@ -76,40 +76,52 @@ font-weight: 600;
 font-size: 1.1rem;
 `
 
-export default function WorkExperienceModal( { handleModal }) {
-  const [company, setCompany] = useState('');
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState('');
-  const [currentTask, setCurrentTask] = useState('');
+export default function WorkExperienceModal( { addWorkExp, handleModal }) {
+  const [exp, setExp] = useState({
+    company: '',
+    startDate: '',
+    endDate: '',
+    currentTask: ''
+  });
 
-  const handleClick = (e) => {
+  const handleClick = () => {
+    const {company, startDate, endDate, currentTask} = exp;
     handleModal()
-
+    const experience = new WorkExperience(company, startDate, endDate, [currentTask])
+    addWorkExp(experience)
   }
+
+  const handleChange = (e) => {
+    setExp({
+      ...exp, [e.target.name]: e.target.value
+    })
+  }
+  
+
   
   return (
     <Modal>
       <Dialog>
         <Header>WORK EXPERIENCE</Header>
         <InputContainer>
-        <label htmlFor="organization">
+        <label htmlFor="company">
           <Company/>
-          <input type="text" name="organization" id="organization" placeholder="Company" value={company} onChange={setCompany}/>
+          <input type="text" name="company" id="company" placeholder="Company" value={exp.company} onChange={handleChange} required/>
         </label>
         <label htmlFor="startDate">
           Start Date:
-          <input type="date" name="startDate" id="startDate" value={startDate} onChange={setStartDate}/>
+          <input type="date" name="startDate" id="startDate" value={exp.startDate} onChange={handleChange} required/>
         </label>
         <label htmlFor="endDate">
           End Date:
-          <input type="date" name="endDate" id="endDate" value={endDate} onChange={setEndDate}/>
+          <input type="date" name="endDate" id="endDate" value={exp.endDate} onChange={handleChange}/>
         </label>
         <label htmlFor="task">
         <strong>-</strong>
-          <input type="text" name="task" value={currentTask} onChange={setCurrentTask}/>
+          <input type="text" name="currentTask" value={exp.currentTask} onChange={handleChange}/>
         </label>
         </InputContainer>
-        <SaveButton> Save </SaveButton>
+        <SaveButton onClick={handleClick}> Save </SaveButton>
       </Dialog>
     </Modal>
   )

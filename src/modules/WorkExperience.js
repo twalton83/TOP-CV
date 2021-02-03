@@ -1,6 +1,6 @@
 export default class WorkExperience {
   constructor(company, startDate, endDate, tasks){
-    this.compan = company;
+    this.company = company;
     this.startDate = startDate;
     this.endDate = endDate;
     this.tasks = tasks

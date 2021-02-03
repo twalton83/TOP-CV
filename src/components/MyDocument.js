@@ -44,7 +44,7 @@ export default function MyDocument() {
   });
 
   const [workExperience, setWorkExperience] = useState([]);
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"]);
   const [education, setEducation] = useState([]);
   const [projects, setProjects] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -56,6 +56,11 @@ export default function MyDocument() {
       [e.target.dataset.id] : e.target.value
     })
   }
+
+  const addWorkExperience = (experience) => {
+    setWorkExperience([...workExperience, experience])
+  }
+  
 
   const handleContactInfo = (e) => {
     const contact = contactInfo[e.target.name]
@@ -72,12 +77,13 @@ export default function MyDocument() {
     setWorkModalShow(!workModalShow)
   }
   
+
   
   return (
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
-      <ResumeBody displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
+      <ResumeBody addWorkExp = { addWorkExperience } displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
 
     </ResumeSheet>
   )

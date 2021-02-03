@@ -24,6 +24,7 @@ const Button = styled.button`
 
 
 const Header = styled.h3`
+text-align: left;
 color: ${props => props.color};
 font-size: 1.5rem;
 `
