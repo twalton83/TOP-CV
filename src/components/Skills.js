@@ -33,7 +33,7 @@ svg {
 };
 `
 
-export default function Skills({ skills }) {
+export default function Skills({ addSkill, skills }) {
 
   const [displayAdd, setDisplayAdd] = useState(false);
   const [newSkill, setnewSkill] = useState('');
@@ -52,11 +52,21 @@ export default function Skills({ skills }) {
 
   const handleChange = (e) => {
     setnewSkill(e.target.value)
+
   }
 
   const handleSubmit = (e) => {
     e.persist();
-    console.log(e.key)
+    if(e.key === "Enter" || e.type === "blur"){
+      if(newSkill === "") {
+        setDisplayAdd(false)
+        return
+      }
+      addSkill(newSkill)
+      setDisplayAdd(false)
+      setnewSkill("")
+    }
+
   }
   
   return (

@@ -64,6 +64,8 @@ export default function MyDocument() {
   const addSkill = (skill) => {
     setSkills([...skills, skill])
   }
+
+
   
   
 
@@ -88,7 +90,7 @@ export default function MyDocument() {
     <ResumeSheet>
       <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
       <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
-      <ResumeBody addWorkExp = { addWorkExperience } displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
+      <ResumeBody addSkill={ addSkill }addWorkExp = { addWorkExperience } displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
 
     </ResumeSheet>
   )
