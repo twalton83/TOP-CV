@@ -60,6 +60,11 @@ export default function MyDocument() {
   const addWorkExperience = (experience) => {
     setWorkExperience([...workExperience, experience])
   }
+
+  const addSkill = (skill) => {
+    setSkills([...skills, skill])
+  }
+  
   
 
   const handleContactInfo = (e) => {
