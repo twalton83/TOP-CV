@@ -17,10 +17,8 @@ export default function ResumeBody({
   education,
   projects,
   sectionDisplay,
-  displayWorkModal,
-  displayProjModal,
-  handleProjModal,
   handleModal,
+  displayModal,
   addWorkExp,
   addProj,
 }) {
@@ -29,18 +27,24 @@ export default function ResumeBody({
       {sectionDisplay.work && (
         <WorkExperience
           addWorkExp={addWorkExp}
-          displayModal={displayWorkModal}
+          displayModal={displayModal}
           handleModal={handleModal}
           workExperience={workExperience}
         />
       )}
       {sectionDisplay.skills && <Skills addSkill={addSkill} skills={skills} />}
-      {sectionDisplay.education && <Education education={education} />}
+      {sectionDisplay.education && (
+        <Education
+          displayModal={displayModal}
+          handleModal={handleModal}
+          education={education}
+        />
+      )}
       {sectionDisplay.projects && (
         <Projects
           addProj={addProj}
-          displayModal={displayProjModal}
-          handleModal={handleProjModal}
+          displayModal={displayModal}
+          handleModal={handleModal}
           projects={projects}
         />
       )}

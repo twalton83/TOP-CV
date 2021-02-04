@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import Project from "../modules/Project"
+import { ReactComponent as Company } from "../assets/domain-24px.svg"
+import WorkExperience from "../modules/WorkExperience"
 
 const Header = styled.h2`
   margin: 0 auto;
@@ -74,25 +75,25 @@ const SaveButton = styled.button`
   font-size: 1.1rem;
 `
 
-export default function ProjectModal({ addProj, handleModal }) {
-  const [proj, setProj] = useState({
+export default function WorkExperienceModal({ addWorkExp, handleModal }) {
+  const [education, setEducation] = useState({
     name: "",
     startDate: "",
     endDate: "",
-    currentTask: "",
+    degree: "",
   })
 
   const handleClick = (e) => {
-    const { name, startDate, endDate, currentTask } = proj
+    const { company, startDate, endDate, currentTask } = education
     handleModal(e)
-    const project = new Project(name, startDate, endDate, [currentTask])
-    console.log(project)
-    addProj(project)
+    const experience = new WorkExperience(company, startDate, endDate, [
+      currentTask,
+    ])
   }
 
   const handleChange = (e) => {
-    setProj({
-      ...proj,
+    setEducation({
+      ...education,
       [e.target.name]: e.target.value,
     })
   }
@@ -100,15 +101,16 @@ export default function ProjectModal({ addProj, handleModal }) {
   return (
     <Modal>
       <Dialog>
-        <Header>Project</Header>
+        <Header>EDUCATION</Header>
         <InputContainer>
           <label htmlFor="name">
+            <Company />
             <input
               type="text"
               name="name"
               id="name"
               placeholder="Name"
-              value={proj.name}
+              value={education.name}
               onChange={handleChange}
               required
             />
@@ -119,7 +121,7 @@ export default function ProjectModal({ addProj, handleModal }) {
               type="date"
               name="startDate"
               id="startDate"
-              value={proj.startDate}
+              value={education.startDate}
               onChange={handleChange}
               required
             />
@@ -130,7 +132,7 @@ export default function ProjectModal({ addProj, handleModal }) {
               type="date"
               name="endDate"
               id="endDate"
-              value={proj.endDate}
+              value={education.endDate}
               onChange={handleChange}
             />
           </label>
@@ -138,13 +140,13 @@ export default function ProjectModal({ addProj, handleModal }) {
             <strong>-</strong>
             <input
               type="text"
-              name="currentTask"
-              value={proj.currentTask}
+              name="degree"
+              value={education.degree}
               onChange={handleChange}
             />
           </label>
         </InputContainer>
-        <SaveButton id="project" onClick={handleClick}>
+        <SaveButton id="education" onClick={handleClick}>
           Save
         </SaveButton>
       </Dialog>

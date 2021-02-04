@@ -33,7 +33,7 @@ export default function ResumeContact({
       {!noItems && (
         <ContactItemList items={contactItems} handleModal={handleModal} />
       )}
-      {displayModal && (
+      {displayModal.contact && (
         <ContactModal
           contactInfo={contactItems}
           handleContactInfo={handleContactInfo}

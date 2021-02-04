@@ -46,9 +46,12 @@ export default function MyDocument() {
   const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"])
   const [education, setEducation] = useState([])
   const [projects, setProjects] = useState([])
-  const [modalShow, setModalShow] = useState(false)
-  const [workModalShow, setWorkModalShow] = useState(false)
-  const [projModalShow, setProjModalShow] = useState(false)
+  const [modalShow, setModalShow] = useState({
+    work: false,
+    project: false,
+    contact: false,
+    education: false,
+  })
 
   const handlePersonalInput = (e) => {
     setPersonalInfo({
@@ -74,16 +77,12 @@ export default function MyDocument() {
     setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
   }
 
-  const handleModalShow = () => {
-    setModalShow(!modalShow)
-  }
-
-  const handleWorkModal = () => {
-    setWorkModalShow(!workModalShow)
-  }
-
-  const handleProjModal = () => {
-    setProjModalShow(!projModalShow)
+  const handleModalShow = (e) => {
+    console.log(e.target.id)
+    setModalShow({
+      ...modalShow,
+      [e.target.id]: !modalShow[e.target.id],
+    })
   }
 
   return (
@@ -101,10 +100,8 @@ export default function MyDocument() {
       <ResumeBody
         addSkill={addSkill}
         addWorkExp={addWorkExperience}
-        displayProjModal={projModalShow}
-        handleProjModal={handleProjModal}
-        displayWorkModal={workModalShow}
-        handleModal={handleWorkModal}
+        displayModal={modalShow}
+        handleModal={handleModalShow}
         skills={skills}
         workExperience={workExperience}
         addProj={addProj}

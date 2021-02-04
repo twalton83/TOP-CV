@@ -83,9 +83,9 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
     currentTask: "",
   })
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     const { company, startDate, endDate, currentTask } = exp
-    handleModal()
+    handleModal(e)
     const experience = new WorkExperience(company, startDate, endDate, [
       currentTask,
     ])
@@ -147,7 +147,9 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
             />
           </label>
         </InputContainer>
-        <SaveButton onClick={handleClick}> Save </SaveButton>
+        <SaveButton id="work" onClick={handleClick}>
+          Save
+        </SaveButton>
       </Dialog>
     </Modal>
   )

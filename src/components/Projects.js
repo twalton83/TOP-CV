@@ -25,7 +25,9 @@ export default function Projects({
     <div>
       <Header color="#284B63">PROJECTS</Header>
       {!projects.length && (
-        <Button onClick={handleModal}>ADD A PROJECT </Button>
+        <Button id="project" onClick={handleModal}>
+          ADD A PROJECT
+        </Button>
       )}
       {projects.map((proj) => (
         <div>
@@ -44,7 +46,7 @@ export default function Projects({
           )}
         </div>
       ))}
-      {displayModal && (
+      {displayModal.project && (
         <ProjectModal addProj={addProj} handleModal={handleModal} />
       )}
     </div>

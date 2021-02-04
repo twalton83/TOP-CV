@@ -24,8 +24,7 @@ export default function WorkExperience({
   return (
     <div>
       <Header color="#284B63">WORK EXPERIENCE</Header>
-      {/* { !workExperience.length && <Button onClick={ handleModal} >ADD AN EXPERIENCE</Button> } */}
-      {displayModal && (
+      {displayModal.work && (
         <WorkExperienceModal
           addWorkExp={addWorkExp}
           handleModal={handleModal}
@@ -44,7 +43,9 @@ export default function WorkExperience({
           </Tasks>
         </div>
       ))}
-      <Button onClick={handleModal}>ADD AN EXPERIENCE</Button>
+      <Button id="work" onClick={handleModal}>
+        ADD AN EXPERIENCE
+      </Button>
     </div>
   )
 }
