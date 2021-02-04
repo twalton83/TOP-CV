@@ -1,13 +1,13 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 const FlexWrapper = styled.div`
-display: flex;
-flex-direction: ${props => props.direction};
-align-items: ${props => props.align};
-height: 100%;
-min-height: 100vh;
-width: 100%;
-background-color: ${props => props.color};
+  display: flex;
+  flex-direction: ${(props) => props.direction};
+  align-items: ${(props) => props.align};
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  background-color: ${(props) => props.color};
 `
 
 const Button = styled.button`
@@ -22,15 +22,10 @@ const Button = styled.button`
   font-weight: 600;
 `
 
-
 const Header = styled.h3`
-text-align: left;
-color: ${props => props.color};
-font-size: 1.5rem;
+  text-align: left;
+  color: ${(props) => props.color};
+  font-size: 1.5rem;
 `
 
-export {
-  Header,
-  FlexWrapper,
-  Button
-}
+export { Header, FlexWrapper, Button }

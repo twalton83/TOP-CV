@@ -1,59 +1,59 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
-import ResumeHeader from './ResumeHeader';
-import ResumeContact from './ResumeContact';
-import ResumeBody from './ResumeBody';
-
+import React, { useState } from "react"
+import styled from "styled-components"
+import ResumeHeader from "./ResumeHeader"
+import ResumeContact from "./ResumeContact"
+import ResumeBody from "./ResumeBody"
 
 const ResumeSheet = styled.section`
-display: flex;
-flex-direction: column;
-min-height: 80vh;
-max-height: 3300px;
-max-width: 2550px;
-height: 100vh;
-width: 70vw;
-border: 1px solid black;
-background-color: white;
-padding: 1rem;
-margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  max-height: 3300px;
+  max-width: 2550px;
+  height: 100vh;
+  width: 70vw;
+  border: 1px solid black;
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 2rem;
 `
 
 export default function MyDocument() {
   const [personalInfo, setPersonalInfo] = useState({
     name: "John Doe",
     title: "Professional Title",
-    pitch: "A short and engaging pitch about yourself."
-  });
+    pitch: "A short and engaging pitch about yourself.",
+  })
   const [contactInfo, setContactInfo] = useState({
     email: "",
-    country:  "",
-    city:  "",
+    country: "",
+    city: "",
     address: "",
     phone: "",
     website: "",
-    stack : "",
+    stack: "",
     linkedin: "",
-    github: ""
-  });
+    github: "",
+  })
   const [sectionDisplay, setSectionDisplay] = useState({
     work: true,
     skills: true,
     projects: true,
-    education: true
-  });
+    education: true,
+  })
 
-  const [workExperience, setWorkExperience] = useState([]);
-  const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"]);
-  const [education, setEducation] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [workModalShow, setWorkModalShow] = useState(false);
+  const [workExperience, setWorkExperience] = useState([])
+  const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"])
+  const [education, setEducation] = useState([])
+  const [projects, setProjects] = useState([])
+  const [modalShow, setModalShow] = useState(false)
+  const [workModalShow, setWorkModalShow] = useState(false)
+  const [projModalShow, setProjModalShow] = useState(false)
 
   const handlePersonalInput = (e) => {
     setPersonalInfo({
       ...personalInfo,
-      [e.target.dataset.id] : e.target.value
+      [e.target.dataset.id]: e.target.value,
     })
   }
 
@@ -61,37 +61,57 @@ export default function MyDocument() {
     setWorkExperience([...workExperience, experience])
   }
 
+  const addProj = (project) => {
+    setProjects([...projects, project])
+  }
+
   const addSkill = (skill) => {
     setSkills([...skills, skill])
   }
 
-
-  
-  
-
   const handleContactInfo = (e) => {
     const contact = contactInfo[e.target.name]
-    setContactInfo({...contactInfo, 
-      [e.target.name] : e.target.value
-    })
+    setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
   }
-  
-  const handleModalShow = (e) => {
+
+  const handleModalShow = () => {
     setModalShow(!modalShow)
   }
 
-  const handleWorkModal = (e) => {
+  const handleWorkModal = () => {
     setWorkModalShow(!workModalShow)
   }
-  
 
-  
+  const handleProjModal = () => {
+    setProjModalShow(!projModalShow)
+  }
+
   return (
     <ResumeSheet>
-      <ResumeHeader personalInfo = { personalInfo } handlePersonalInput = { handlePersonalInput } />
-      <ResumeContact displayModal = { modalShow } handleModal = { handleModalShow } contactItems = { contactInfo } handleContactInfo = { handleContactInfo } />
-      <ResumeBody addSkill={ addSkill }addWorkExp = { addWorkExperience } displayWorkModal = { workModalShow }  handleModal = { handleWorkModal } skills = { skills } workExperience = { workExperience } projects = { projects } education = { education } sectionDisplay = { sectionDisplay } />
-
+      <ResumeHeader
+        personalInfo={personalInfo}
+        handlePersonalInput={handlePersonalInput}
+      />
+      <ResumeContact
+        displayModal={modalShow}
+        handleModal={handleModalShow}
+        contactItems={contactInfo}
+        handleContactInfo={handleContactInfo}
+      />
+      <ResumeBody
+        addSkill={addSkill}
+        addWorkExp={addWorkExperience}
+        displayProjModal={projModalShow}
+        handleProjModal={handleProjModal}
+        displayWorkModal={workModalShow}
+        handleModal={handleWorkModal}
+        skills={skills}
+        workExperience={workExperience}
+        addProj={addProj}
+        projects={projects}
+        education={education}
+        sectionDisplay={sectionDisplay}
+      />
     </ResumeSheet>
   )
 }

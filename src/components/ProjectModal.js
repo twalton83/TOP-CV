@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { ReactComponent as Company } from "../assets/domain-24px.svg"
-import WorkExperience from "../modules/WorkExperience"
+import Project from "../modules/Project"
 
 const Header = styled.h2`
   margin: 0 auto;
@@ -75,26 +74,25 @@ const SaveButton = styled.button`
   font-size: 1.1rem;
 `
 
-export default function WorkExperienceModal({ addWorkExp, handleModal }) {
-  const [exp, setExp] = useState({
-    company: "",
+export default function ProjectModal({ addProj, handleModal }) {
+  const [proj, setProj] = useState({
+    name: "",
     startDate: "",
     endDate: "",
     currentTask: "",
   })
 
   const handleClick = () => {
-    const { company, startDate, endDate, currentTask } = exp
+    const { name, startDate, endDate, currentTask } = proj
     handleModal()
-    const experience = new WorkExperience(company, startDate, endDate, [
-      currentTask,
-    ])
-    addWorkExp(experience)
+    const project = new Project(name, startDate, endDate, [currentTask])
+    console.log(project)
+    addProj(project)
   }
 
   const handleChange = (e) => {
-    setExp({
-      ...exp,
+    setProj({
+      ...proj,
       [e.target.name]: e.target.value,
     })
   }
@@ -102,16 +100,15 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   return (
     <Modal>
       <Dialog>
-        <Header>WORK EXPERIENCE</Header>
+        <Header>Project</Header>
         <InputContainer>
-          <label htmlFor="company">
-            <Company />
+          <label htmlFor="name">
             <input
               type="text"
-              name="company"
-              id="company"
-              placeholder="Company"
-              value={exp.company}
+              name="name"
+              id="name"
+              placeholder="Name"
+              value={proj.name}
               onChange={handleChange}
               required
             />
@@ -122,7 +119,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               type="date"
               name="startDate"
               id="startDate"
-              value={exp.startDate}
+              value={proj.startDate}
               onChange={handleChange}
               required
             />
@@ -133,7 +130,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               type="date"
               name="endDate"
               id="endDate"
-              value={exp.endDate}
+              value={proj.endDate}
               onChange={handleChange}
             />
           </label>
@@ -142,7 +139,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
             <input
               type="text"
               name="currentTask"
-              value={exp.currentTask}
+              value={proj.currentTask}
               onChange={handleChange}
             />
           </label>
