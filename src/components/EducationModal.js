@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
-import WorkExperience from "../modules/WorkExperience"
+import Education from "../modules/Education"
 
 const Header = styled.h2`
   margin: 0 auto;
@@ -75,7 +75,7 @@ const SaveButton = styled.button`
   font-size: 1.1rem;
 `
 
-export default function WorkExperienceModal({ addWorkExp, handleModal }) {
+export default function EducationModal({ addEducation, handleModal }) {
   const [education, setEducation] = useState({
     name: "",
     startDate: "",
@@ -84,11 +84,10 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   })
 
   const handleClick = (e) => {
-    const { company, startDate, endDate, currentTask } = education
+    const { name, startDate, endDate, degree } = education
     handleModal(e)
-    const experience = new WorkExperience(company, startDate, endDate, [
-      currentTask,
-    ])
+    const school = new Education(name, startDate, endDate, degree)
+    addEducation(school)
   }
 
   const handleChange = (e) => {
@@ -136,14 +135,14 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="task">
-            <strong>-</strong>
-            <input
-              type="text"
-              name="degree"
-              value={education.degree}
-              onChange={handleChange}
-            />
+          <label htmlFor="degree">
+            Degree Type:
+            <select value={education.degree} onBlur={handleChange}>
+              <option value="High School Diploma">High School Diploma</option>
+              <option value="Bachelors">Bachelors</option>
+              <option value="Masters">Masters</option>
+              <option value="Certificate">Certificate</option>
+            </select>
           </label>
         </InputContainer>
         <SaveButton id="education" onClick={handleClick}>

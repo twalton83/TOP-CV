@@ -21,6 +21,7 @@ export default function ResumeBody({
   displayModal,
   addWorkExp,
   addProj,
+  addEducation,
 }) {
   return (
     <Container>
@@ -35,6 +36,7 @@ export default function ResumeBody({
       {sectionDisplay.skills && <Skills addSkill={addSkill} skills={skills} />}
       {sectionDisplay.education && (
         <Education
+          addEducation={addEducation}
           displayModal={displayModal}
           handleModal={handleModal}
           education={education}

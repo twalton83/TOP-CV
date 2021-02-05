@@ -68,6 +68,10 @@ export default function MyDocument() {
     setProjects([...projects, project])
   }
 
+  const addEducation = (school) => {
+    setEducation([...education, school])
+  }
+
   const addSkill = (skill) => {
     setSkills([...skills, skill])
   }
@@ -78,7 +82,6 @@ export default function MyDocument() {
   }
 
   const handleModalShow = (e) => {
-    console.log(e.target.id)
     setModalShow({
       ...modalShow,
       [e.target.id]: !modalShow[e.target.id],
@@ -100,6 +103,7 @@ export default function MyDocument() {
       <ResumeBody
         addSkill={addSkill}
         addWorkExp={addWorkExperience}
+        addEducation={addEducation}
         displayModal={modalShow}
         handleModal={handleModalShow}
         skills={skills}
