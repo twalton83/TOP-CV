@@ -28,12 +28,16 @@ export default function ResumeContact({
 
   return (
     <Section>
-      {noItems && <Button onClick={handleModal}> ADD CONTACTS </Button>}
+      {noItems && (
+        <Button id="contact" onClick={handleModal}>
+          ADD CONTACTS
+        </Button>
+      )}
 
       {!noItems && (
         <ContactItemList items={contactItems} handleModal={handleModal} />
       )}
-      {displayModal.contact && (
+      {displayModal && (
         <ContactModal
           contactInfo={contactItems}
           handleContactInfo={handleContactInfo}

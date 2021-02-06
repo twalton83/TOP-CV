@@ -28,4 +28,88 @@ const Header = styled.h3`
   font-size: 1.5rem;
 `
 
-export { Header, FlexWrapper, Button }
+const ModalHeader = styled.h2``
+
+const Modal = styled.div`
+  z-index: 1;
+  width: 100vw;
+  height: 100%;
+  min-height: 107vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
+const Dialog = styled.div`
+  z-index: 2;
+  width: auto;
+  max-width: 30vw;
+  height: 50%;
+  background-color: #394554;
+  color: white;
+  margin: 0 auto;
+  margin-top: 20%;
+  border-radius: 20px;
+  display: grid;
+  grid-template-rows: 15% 70% 15%;
+
+  svg {
+    fill: white;
+    height: 24px;
+    width: auto;
+  }
+
+  input {
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+    height: 1.2rem;
+    font-size: 1.2rem;
+    color: white;
+    &:focus {
+      border-bottom: 1px solid #1cbfaf;
+    }
+    ::placeholder {
+      font-size: 1.2rem;
+    }
+  }
+`
+
+const InputContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  input {
+    width: 75%;
+  }
+`
+
+const SaveButton = styled.button`
+  z-index: 2;
+  width: 100px;
+  height: 40px;
+  background-color: #1cbfaf;
+  border-radius: 30px;
+  border: none;
+  margin-left: auto;
+  margin-right: 1rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+`
+
+export {
+  Header,
+  FlexWrapper,
+  Button,
+  Modal,
+  ModalHeader,
+  Dialog,
+  SaveButton,
+  InputContainer,
+}

@@ -95,7 +95,7 @@ export default function MyDocument() {
         handlePersonalInput={handlePersonalInput}
       />
       <ResumeContact
-        displayModal={modalShow}
+        displayModal={modalShow.contact}
         handleModal={handleModalShow}
         contactItems={contactInfo}
         handleContactInfo={handleContactInfo}
