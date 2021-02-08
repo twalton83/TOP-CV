@@ -32,7 +32,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   const handleClick = (e) => {
     const { company, title, startDate, endDate, tasks } = exp
     handleModal(e)
-    const experience = new WorkExperience(company, startDate, endDate, [tasks])
+    const experience = new WorkExperience(company, startDate, endDate, tasks)
     addWorkExp(experience)
   }
 
@@ -117,7 +117,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               {exp.tasks.map((task) => (
                 <li>{task}</li>
               ))}
-              <li key={uuidv4()}>
+              <li>
                 <input
                   type="text"
                   name="currentTask"
