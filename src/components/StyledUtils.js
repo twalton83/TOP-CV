@@ -52,11 +52,18 @@ const Dialog = styled.div`
   margin-top: 20%;
   border-radius: 20px;
   display: grid;
+  grid-template-columns: 100%;
   grid-template-rows: 15% 70% 15%;
 
   svg {
     fill: white;
     height: 24px;
+    width: auto;
+  }
+
+  label {
+    display: flex;
+    flex-direction: row;
     width: auto;
   }
 
@@ -78,8 +85,9 @@ const Dialog = styled.div`
 `
 
 const InputContainer = styled.div`
-  width: 100%;
+  width: auto;
   height: 100%;
+  padding-left: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -103,6 +111,23 @@ const SaveButton = styled.button`
   font-size: 1.1rem;
 `
 
+const DatePicker = styled.input`
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  height: 1.2rem;
+  width: auto !important;
+  font-size: 1.2rem;
+  color: white;
+  &:focus {
+    border-bottom: 1px solid #1cbfaf;
+  }
+  ::placeholder {
+    font-size: 1.2rem;
+  }
+`
+
 export {
   Header,
   FlexWrapper,
@@ -112,4 +137,5 @@ export {
   Dialog,
   SaveButton,
   InputContainer,
+  DatePicker,
 }

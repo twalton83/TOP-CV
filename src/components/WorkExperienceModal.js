@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styled from "styled-components"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
 import WorkExperience from "../modules/WorkExperience"
 import {
@@ -7,7 +8,14 @@ import {
   InputContainer,
   Dialog,
   SaveButton,
+  DatePicker,
 } from "./StyledUtils"
+
+const DateWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`
 
 export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   const [exp, setExp] = useState({
@@ -50,27 +58,28 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               required
             />
           </label>
-          <label htmlFor="startDate">
-            Start Date:
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              value={exp.startDate}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="endDate">
-            End Date:
-            <input
-              type="date"
-              name="endDate"
-              id="endDate"
-              value={exp.endDate}
-              onChange={handleChange}
-            />
-          </label>
+          <DateWrapper>
+            <label htmlFor="startDate">
+              <input
+                type="date"
+                name="startDate"
+                id="startDate"
+                value={exp.startDate}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <strong>-</strong>
+            <label htmlFor="endDate">
+              <input
+                type="date"
+                name="endDate"
+                id="endDate"
+                value={exp.endDate}
+                onChange={handleChange}
+              />
+            </label>
+          </DateWrapper>
           <label htmlFor="task">
             Tasks
             <strong>-</strong>

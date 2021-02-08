@@ -147,7 +147,7 @@ export default function ContactModal({
             <label htmlFor="email">
               <Email />
               <input
-                value={email.value}
+                value={email}
                 type="email"
                 name="email"
                 id="email"
@@ -158,7 +158,7 @@ export default function ContactModal({
             <label htmlFor="phone">
               <Phone />
               <input
-                value={phone.value}
+                value={phone}
                 type="phone"
                 name="phone"
                 id="phone"
@@ -169,7 +169,7 @@ export default function ContactModal({
             <label htmlFor="address">
               <Country />
               <input
-                value={country.value}
+                value={country}
                 type="text"
                 name="country"
                 id="country"
@@ -181,7 +181,7 @@ export default function ContactModal({
               <City />
               <input
                 type="text"
-                value={city.value}
+                value={city}
                 name="city"
                 id="city"
                 placeholder="City"
@@ -191,7 +191,7 @@ export default function ContactModal({
             <label htmlFor="address">
               <Address />
               <input
-                value={address.value}
+                value={address}
                 type="text"
                 name="address"
                 id="address"
@@ -208,7 +208,7 @@ export default function ContactModal({
               <Website />
               <input
                 type="text"
-                value={website.value}
+                value={website}
                 name="website"
                 id="website"
                 placeholder="Website"
@@ -219,7 +219,7 @@ export default function ContactModal({
               <Github />
               <input
                 type="text"
-                value={github.value}
+                value={github}
                 name="github"
                 id="github"
                 placeholder="Github"
@@ -230,7 +230,7 @@ export default function ContactModal({
               <LinkedIn />
               <input
                 type="text"
-                value={linkedin.value}
+                value={linkedin}
                 name="linkedin"
                 id="linkedin"
                 placeholder="LinkedIn"
@@ -241,7 +241,7 @@ export default function ContactModal({
               <StackOverflow />
               <input
                 type="text"
-                value={stack.value}
+                value={stack}
                 name="stack"
                 id="stack"
                 placeholder="Stack Overflow"

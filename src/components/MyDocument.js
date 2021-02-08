@@ -82,9 +82,10 @@ export default function MyDocument() {
   }
 
   const handleModalShow = (e) => {
+    const modal = e.target.id ? e.target.id : e.target.dataset.modal
     setModalShow({
       ...modalShow,
-      [e.target.id]: !modalShow[e.target.id],
+      [modal]: !modalShow[modal],
     })
   }
 
