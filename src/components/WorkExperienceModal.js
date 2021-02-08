@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
 import WorkExperience from "../modules/WorkExperience"
 import {
@@ -18,19 +19,20 @@ const DateWrapper = styled.div`
 `
 
 export default function WorkExperienceModal({ addWorkExp, handleModal }) {
+  const [displayAdd, setDisplayAdd] = useState(true)
   const [exp, setExp] = useState({
     company: "",
+    title: "",
     startDate: "",
     endDate: "",
     currentTask: "",
+    tasks: [],
   })
 
   const handleClick = (e) => {
-    const { company, startDate, endDate, currentTask } = exp
+    const { company, title, startDate, endDate, tasks } = exp
     handleModal(e)
-    const experience = new WorkExperience(company, startDate, endDate, [
-      currentTask,
-    ])
+    const experience = new WorkExperience(company, startDate, endDate, [tasks])
     addWorkExp(experience)
   }
 
@@ -40,6 +42,23 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
       [e.target.name]: e.target.value,
     })
   }
+  // implement enter press to add task
+  const handleSubmit = (e) => {
+    e.persist()
+    if (e.key === "Enter" || e.type === "blur") {
+      if (exp.currentTask === "") {
+        setDisplayAdd(false)
+        return
+      }
+      setExp({
+        ...exp,
+        currentTask: "",
+        tasks: [...exp.tasks, exp.currentTask],
+      })
+      setDisplayAdd(false)
+    }
+  }
+  // use UL with LIs of inputs, similar to the contact <header></header>
 
   return (
     <Modal>
@@ -54,6 +73,18 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               id="company"
               placeholder="Company"
               value={exp.company}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label htmlFor="title">
+            Title:
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="title"
+              value={exp.title}
               onChange={handleChange}
               required
             />
@@ -82,13 +113,21 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
           </DateWrapper>
           <label htmlFor="task">
             Tasks
-            <strong>-</strong>
-            <input
-              type="text"
-              name="currentTask"
-              value={exp.currentTask}
-              onChange={handleChange}
-            />
+            <ul>
+              {exp.tasks.map((task) => (
+                <li>{task}</li>
+              ))}
+              <li key={uuidv4()}>
+                <input
+                  type="text"
+                  name="currentTask"
+                  value={exp.currentTask}
+                  onChange={handleChange}
+                  onKeyPress={handleSubmit}
+                  onBlur={handleSubmit}
+                />
+              </li>
+            </ul>
           </label>
         </InputContainer>
         <SaveButton id="work" onClick={handleClick}>
