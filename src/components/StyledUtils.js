@@ -64,10 +64,11 @@ const Dialog = styled.div`
   label {
     display: flex;
     flex-direction: row;
-    width: auto;
+    width: 100%;
   }
 
   input {
+    width: 100%;
     background-color: inherit;
     border: none;
     border-bottom: 1px solid white;

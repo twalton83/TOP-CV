@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 import { Button, Header } from "./StyledUtils"
 import WorkExperienceModal from "./WorkExperienceModal"
 
@@ -38,7 +39,7 @@ export default function WorkExperience({
           </Dates>
           <Tasks>
             {exp.tasks.map((t) => (
-              <li>{t}</li>
+              <li key={uuidv4()}>{t}</li>
             ))}
           </Tasks>
         </div>

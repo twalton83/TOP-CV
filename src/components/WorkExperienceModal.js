@@ -18,6 +18,12 @@ const DateWrapper = styled.div`
   justify-content: space-evenly;
 `
 
+const TaskList = styled.ul`
+  li > input {
+    width: 100%;
+  }
+`
+
 export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   const [displayAdd, setDisplayAdd] = useState(true)
   const [exp, setExp] = useState({
@@ -30,9 +36,16 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   })
 
   const handleClick = (e) => {
+    if (exp.startDate === "" || exp.company === "" || exp.title === "") return
     const { company, title, startDate, endDate, tasks } = exp
     handleModal(e)
-    const experience = new WorkExperience(company, startDate, endDate, tasks)
+    const experience = new WorkExperience(
+      company,
+      title,
+      startDate,
+      endDate,
+      tasks
+    )
     addWorkExp(experience)
   }
 
@@ -58,8 +71,6 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
       setDisplayAdd(false)
     }
   }
-  // use UL with LIs of inputs, similar to the contact <header></header>
-
   return (
     <Modal>
       <Dialog>
@@ -77,18 +88,15 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               required
             />
           </label>
-          <label htmlFor="title">
-            Title:
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="title"
-              value={exp.title}
-              onChange={handleChange}
-              required
-            />
-          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title/Position"
+            value={exp.title}
+            onChange={handleChange}
+            required
+          />
           <DateWrapper>
             <label htmlFor="startDate">
               <input
@@ -111,24 +119,23 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
               />
             </label>
           </DateWrapper>
-          <label htmlFor="task">
-            Tasks
-            <ul>
-              {exp.tasks.map((task) => (
-                <li>{task}</li>
-              ))}
-              <li>
-                <input
-                  type="text"
-                  name="currentTask"
-                  value={exp.currentTask}
-                  onChange={handleChange}
-                  onKeyPress={handleSubmit}
-                  onBlur={handleSubmit}
-                />
-              </li>
-            </ul>
-          </label>
+          <p>Tasks and Achievements:</p>
+          <TaskList>
+            {exp.tasks.map((task) => (
+              <li key={uuidv4()}>{task}</li>
+            ))}
+            <li>
+              <input
+                id="currentTask"
+                type="text"
+                name="currentTask"
+                value={exp.currentTask}
+                onChange={handleChange}
+                onKeyPress={handleSubmit}
+                onBlur={handleSubmit}
+              />
+            </li>
+          </TaskList>
         </InputContainer>
         <SaveButton id="work" onClick={handleClick}>
           Save
