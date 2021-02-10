@@ -58,15 +58,15 @@ export default function ContactItemList({ items, handleModal }) {
     return arr
   }
   return (
-    <List>
+    <List onClick={handleModal}>
       {generateItems().map((item) => (
         <ContactItem
-          data-modal="contact"
           onClick={handleModal}
+          data-modal="contact"
           key={item.value}
         >
           {item.svg}
-          <p>{item.value}</p>
+          <p> {item.value}</p>
         </ContactItem>
       ))}
     </List>

@@ -26,6 +26,7 @@ const TaskList = styled.ul`
 
 export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   const [displayAdd, setDisplayAdd] = useState(true)
+
   const [exp, setExp] = useState({
     company: "",
     title: "",
