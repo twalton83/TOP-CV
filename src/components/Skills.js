@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { v4 as uuidv4 } from "uuid"
 import { Header, Button } from "./StyledUtils"
 import SkillBlock from "./SkillBlock"
 import SkillInput from "./SkillInput"
@@ -41,8 +40,6 @@ export default function Skills({ addSkill, skills }) {
   // state should pop up with an add skill input that gets added to the end
 
   // when hit enter or lose focus, skill is added
-
-  const [toggleDisplay, setToggleDisplay] = useState(false)
 
   const handleDisplay = () => {
     setDisplayAdd(true)
