@@ -1,7 +1,9 @@
 language: node_js
 node_js:
-- node
-install: npm install
+  - node
+script:
+  -  yarn install
+  -  yarn run build
 deploy:
   provider: heroku
   api_key:
@@ -10,4 +12,4 @@ deploy:
   on:
     repo: twalton83/my-CV
     branch: development
-  skip_cleanup: 'true'
+  skip_cleanup: 'tru
