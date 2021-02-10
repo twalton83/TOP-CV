@@ -10,6 +10,6 @@ deploy:
     secure: pnc1/jfT9xaWCybsggGODsxKc2KCJVYm4ujBkoBXPACsOpfzNrujd+hGYEY+CQ8WRjxbak+cN3VJV50S/1Hl8m94/sUKryvfHeTvHx0AvVZEbn6MXo295IIXTeIMU4IDbr+i6rpiGZIgYV5esU/hTOzLIwFoxHdzwmjiIcPIlffvm/5uKThIdmsRtshIULmplchrookF11+okMPnuPi3IdKs08xBtS70EYBKSgOyx2ziLsOb2T/wo1C6Qqj4pA+hWiN5/AVCQsV5WYVdDPhP2T52C6eeVYSuPp4LsrKOnA2Gv/HXn4vRhzQlfbJ60EP/gKj6CyFrBD5VzWHm2f5KVnINRPuSJVYlyYkLNU8YhQgljp4pvSQOZbhpvIVmRqZkJJMrdPxONYXVYRIQy0wCeIBZrc2kq7eKOEXH54hBlG61biZrneWi2cVtRv6HY6OEjyY6WoUQEGODi8ZbiAnZjHCxsnuXLYvafoaln4+dCNjwiXCF+hLHlr1WSyS14kRbLnHamBInVQZBxZQBubS8qmzckZiC1GsMDz82qa953Hxrb47YxXnzzD3I1oj5n9rnlCg4B2Ww2dGKP1MsemxBeggLlDYIFyRxF8wQNkvzPTAi3e6NsD88tE01kvIEhnskWYrarP/eEC9DPhwGGLtSkWTuYlHWnPT8ptGv+HSf7Qc=
   app: radiant-harbor-82176
   on:
-    repo: tywalton83/my-CV
+    repo: twalton83/my-CV
     branch: development
   skip_cleanup: 'true'
