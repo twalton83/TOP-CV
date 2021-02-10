@@ -21,7 +21,6 @@ export default function ProjectModal({ addProj, handleModal }) {
     const { name, startDate, endDate, currentTask } = proj
     handleModal(e)
     const project = new Project(name, startDate, endDate, [currentTask])
-    console.log(project)
     addProj(project)
   }
 
