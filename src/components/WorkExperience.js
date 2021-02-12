@@ -35,7 +35,7 @@ export default function WorkExperience({
   handleModal,
   deleteWork,
 }) {
-  const [displayActions, setDisplayActions] = useState(false)
+  const [displayActions, setDisplayActions] = useState(true)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
 
@@ -50,12 +50,20 @@ export default function WorkExperience({
   }
 
   const handleDelete = (e) => {
-    deleteWork(e.dataset.project)
+    deleteWork(e.currentTarget.dataset.workid)
+  }
+
+  const handleClose = (e) => {
+    handleModal(e)
+    setExperienceToEdit(null)
   }
 
   const handleEditClick = (e) => {
-    setExperienceToEdit(e.dataset.project)
-    handleModal()
+    const experience = workExperience.filter(
+      (work) => e.currentTarget.dataset.workid === work.id
+    )[0]
+    setExperienceToEdit(experience)
+    handleModal(e)
   }
 
   return (
@@ -66,8 +74,8 @@ export default function WorkExperience({
           key={exp.id}
           onMouseOver={handleMouseOver}
           onFocus={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-          onBlur={handleMouseLeave}
+          // onMouseLeave={handleMouseLeave}
+          // onBlur={handleMouseLeave}
         >
           <WorkTitle>{exp.title}</WorkTitle>
           <WorkHeader>{exp.company}</WorkHeader>
@@ -82,11 +90,15 @@ export default function WorkExperience({
           {displayActions && (
             <div>
               <Delete
-                data-project={exp.id}
+                data-workid={exp.id}
                 style={{ fill: "red" }}
                 onClick={handleDelete}
               />
-              <Edit data-project={exp.id} onClick={handleEditClick} />
+              <Edit
+                data-workid={exp.id}
+                data-modal="work"
+                onClick={handleEditClick}
+              />
             </div>
           )}
         </WorkContainer>
@@ -98,7 +110,7 @@ export default function WorkExperience({
         <WorkExperienceModal
           experience={experienceToEdit}
           addWorkExp={addWorkExp}
-          handleModal={handleModal}
+          handleClose={handleClose}
         />
       )}
     </div>

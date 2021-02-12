@@ -25,30 +25,36 @@ const TaskList = styled.ul`
   }
 `
 
-export default function WorkExperienceModal({ addWorkExp, handleModal }) {
+export default function WorkExperienceModal({
+  experience,
+  addWorkExp,
+  handleClose,
+}) {
   const [displayAdd, setDisplayAdd] = useState(true)
 
-  const [exp, setExp] = useState({
-    company: "",
-    title: "",
-    startDate: "",
-    endDate: "",
-    currentTask: "",
-    tasks: [],
-  })
+  const [exp, setExp] = useState(
+    experience || {
+      company: "",
+      title: "",
+      startDate: "",
+      endDate: "",
+      currentTask: "",
+      tasks: [],
+    }
+  )
 
   const handleClick = (e) => {
     if (exp.startDate === "" || exp.company === "" || exp.title === "") return
     const { company, title, startDate, endDate, tasks } = exp
-    handleModal(e)
-    const experience = new WorkExperience(
+    handleClose(e)
+    const newExperience = new WorkExperience(
       company,
       title,
       startDate,
       endDate,
       tasks
     )
-    addWorkExp(experience)
+    addWorkExp(newExperience)
   }
 
   const handleChange = (e) => {
@@ -78,7 +84,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
       <Dialog>
         <div>
           <ModalHeader>WORK EXPERIENCE</ModalHeader>
-          <Close data-modal="work" onClick={handleModal} />
+          <Close data-modal="work" onClick={handleClose} />
         </div>
         <InputContainer>
           <label htmlFor="company">
