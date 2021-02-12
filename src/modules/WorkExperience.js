@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid"
+
 export default class WorkExperience {
   constructor(company, title, startDate, endDate, tasks) {
     this.company = company
@@ -5,6 +7,7 @@ export default class WorkExperience {
     this.startDate = startDate
     this.endDate = endDate
     this.tasks = tasks
+    this.id = uuidv4()
   }
 
   removeTask(id) {

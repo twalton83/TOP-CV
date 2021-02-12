@@ -89,6 +89,11 @@ export default function MyDocument() {
     })
   }
 
+  const deleteWork = (id) => {
+    const filteredWork = workExperience.filter((exp) => id !== exp.id)
+    setWorkExperience(filteredWork)
+  }
+
   return (
     <ResumeSheet>
       <ResumeHeader
@@ -103,6 +108,7 @@ export default function MyDocument() {
       />
       <ResumeBody
         addSkill={addSkill}
+        deleteWork={deleteWork}
         addWorkExp={addWorkExperience}
         addEducation={addEducation}
         displayModal={modalShow}

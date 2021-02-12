@@ -33,30 +33,34 @@ export default function WorkExperience({
   workExperience,
   displayModal,
   handleModal,
+  deleteWork,
 }) {
   const [displayActions, setDisplayActions] = useState(false)
 
   const handleMouseOver = (e) => {
+    e.stopPropagation()
     setDisplayActions(true)
   }
 
-  const handleMouseOut = (e) => {
+  const handleMouseLeave = (e) => {
+    e.stopPropagation()
     setDisplayActions(false)
+  }
+
+  const handleDelete = (e) => {
+    deleteWork(e.target.id)
   }
 
   return (
     <div>
       <Header color="#284B63">WORK EXPERIENCE</Header>
-      {displayModal.work && (
-        <WorkExperienceModal
-          addWorkExp={addWorkExp}
-          handleModal={handleModal}
-        />
-      )}
       {workExperience.map((exp) => (
         <WorkContainer
-          onMouseEnter={handleMouseOver}
-          onMouseOut={handleMouseOut}
+          key={exp.id}
+          onMouseOver={handleMouseOver}
+          onFocus={handleMouseOver}
+          onMouseLeave={handleMouseLeave}
+          onBlur={handleMouseLeave}
         >
           <WorkTitle>{exp.title}</WorkTitle>
           <WorkHeader>{exp.company}</WorkHeader>
@@ -70,7 +74,11 @@ export default function WorkExperience({
           </Tasks>
           {displayActions && (
             <div>
-              <Delete />
+              <Delete
+                id={exp.id}
+                style={{ fill: "red" }}
+                onClick={handleDelete}
+              />
               <Edit />
             </div>
           )}
@@ -79,6 +87,12 @@ export default function WorkExperience({
       <Button id="work" onClick={handleModal}>
         ADD AN EXPERIENCE
       </Button>
+      {displayModal.work && (
+        <WorkExperienceModal
+          addWorkExp={addWorkExp}
+          handleModal={handleModal}
+        />
+      )}
     </div>
   )
 }

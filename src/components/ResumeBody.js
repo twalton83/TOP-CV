@@ -22,11 +22,13 @@ export default function ResumeBody({
   addWorkExp,
   addProj,
   addEducation,
+  deleteWork,
 }) {
   return (
     <Container>
       {sectionDisplay.work && (
         <WorkExperience
+          deleteWork={deleteWork}
           addWorkExp={addWorkExp}
           displayModal={displayModal}
           handleModal={handleModal}
