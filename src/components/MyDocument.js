@@ -95,6 +95,13 @@ export default function MyDocument() {
     setWorkExperience(filteredWork)
   }
 
+  const edit = (id) => {
+    const experiences = [...workExperience]
+    const experienceToEdit = experiences.filter((exp) => id === exp.id)[0]
+
+    // iterate over object to edit the properties
+  }
+
   return (
     <ResumeSheet>
       <ResumeHeader

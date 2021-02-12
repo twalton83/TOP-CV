@@ -36,6 +36,7 @@ export default function WorkExperience({
   deleteWork,
 }) {
   const [displayActions, setDisplayActions] = useState(true)
+  const [editMode, setEditMode] = useState(false)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
 
@@ -55,6 +56,7 @@ export default function WorkExperience({
 
   const handleClose = (e) => {
     handleModal(e)
+    setEditMode(false)
     setExperienceToEdit(null)
   }
 
@@ -62,6 +64,7 @@ export default function WorkExperience({
     const experience = workExperience.filter(
       (work) => e.currentTarget.dataset.workid === work.id
     )[0]
+    setEditMode(true)
     setExperienceToEdit(experience)
     handleModal(e)
   }
@@ -108,6 +111,7 @@ export default function WorkExperience({
       </Button>
       {displayModal.work && (
         <WorkExperienceModal
+          editMode={editMode}
           experience={experienceToEdit}
           addWorkExp={addWorkExp}
           handleClose={handleClose}

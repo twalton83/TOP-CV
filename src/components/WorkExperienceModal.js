@@ -29,6 +29,8 @@ export default function WorkExperienceModal({
   experience,
   addWorkExp,
   handleClose,
+  editMode,
+  edit,
 }) {
   const [displayAdd, setDisplayAdd] = useState(true)
 
@@ -44,6 +46,13 @@ export default function WorkExperienceModal({
   )
 
   const handleClick = (e) => {
+    // if editMode
+
+    if (editMode) {
+      // set up project to parent state and return
+      edit(e.currentTarget.dataset.id)
+      handleClose()
+    }
     if (exp.startDate === "" || exp.company === "" || exp.title === "") return
     const { company, title, startDate, endDate, tasks } = exp
     handleClose(e)
