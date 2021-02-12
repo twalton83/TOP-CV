@@ -37,6 +37,8 @@ export default function WorkExperience({
 }) {
   const [displayActions, setDisplayActions] = useState(false)
 
+  const [experienceToEdit, setExperienceToEdit] = useState(null)
+
   const handleMouseOver = (e) => {
     e.stopPropagation()
     setDisplayActions(true)
@@ -48,7 +50,12 @@ export default function WorkExperience({
   }
 
   const handleDelete = (e) => {
-    deleteWork(e.target.id)
+    deleteWork(e.dataset.project)
+  }
+
+  const handleEditClick = (e) => {
+    setExperienceToEdit(e.dataset.project)
+    handleModal()
   }
 
   return (
@@ -75,20 +82,21 @@ export default function WorkExperience({
           {displayActions && (
             <div>
               <Delete
-                id={exp.id}
+                data-project={exp.id}
                 style={{ fill: "red" }}
                 onClick={handleDelete}
               />
-              <Edit />
+              <Edit data-project={exp.id} onClick={handleEditClick} />
             </div>
           )}
         </WorkContainer>
       ))}
-      <Button id="work" onClick={handleModal}>
+      <Button data-modal="work" onClick={handleModal}>
         ADD AN EXPERIENCE
       </Button>
       {displayModal.work && (
         <WorkExperienceModal
+          experience={experienceToEdit}
           addWorkExp={addWorkExp}
           handleModal={handleModal}
         />

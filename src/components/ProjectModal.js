@@ -8,6 +8,7 @@ import {
   Dialog,
   SaveButton,
 } from "./StyledUtils"
+import { ReactComponent as Close } from "../assets/close-24px.svg"
 
 export default function ProjectModal({ addProj, handleModal }) {
   const [proj, setProj] = useState({
@@ -34,7 +35,11 @@ export default function ProjectModal({ addProj, handleModal }) {
   return (
     <Modal>
       <Dialog>
-        <ModalHeader>Project</ModalHeader>
+        <div>
+          <ModalHeader>Project</ModalHeader>
+          <Close data-modal="project" onClick={handleModal} />
+        </div>
+
         <InputContainer>
           <label htmlFor="name">
             <input
@@ -78,7 +83,7 @@ export default function ProjectModal({ addProj, handleModal }) {
             />
           </label>
         </InputContainer>
-        <SaveButton id="project" onClick={handleClick}>
+        <SaveButton data-modal="project" onClick={handleClick}>
           Save
         </SaveButton>
       </Dialog>

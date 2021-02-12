@@ -21,7 +21,7 @@ export default function Education({
     <div>
       <Header color="#284B63">EDUCATION </Header>
       {!education.length && (
-        <Button id="education" onClick={handleModal}>
+        <Button data-modal="education" onClick={handleModal}>
           ADD EDUCATION
         </Button>
       )}

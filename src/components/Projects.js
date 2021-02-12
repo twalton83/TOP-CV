@@ -58,7 +58,7 @@ export default function Projects({
     <div>
       <Header color="#284B63">PROJECTS</Header>
       {!projects.length && (
-        <Button id="project" onClick={handleModal}>
+        <Button data-modal="project" onClick={handleModal}>
           ADD A PROJECT
         </Button>
       )}

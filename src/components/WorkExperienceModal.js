@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
+import { ReactComponent as Close } from "../assets/close-24px.svg"
 import WorkExperience from "../modules/WorkExperience"
 import {
   Modal,
@@ -75,7 +76,10 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
   return (
     <Modal>
       <Dialog>
-        <ModalHeader>WORK EXPERIENCE</ModalHeader>
+        <div>
+          <ModalHeader>WORK EXPERIENCE</ModalHeader>
+          <Close data-modal="work" onClick={handleModal} />
+        </div>
         <InputContainer>
           <label htmlFor="company">
             <Company />
@@ -138,7 +142,7 @@ export default function WorkExperienceModal({ addWorkExp, handleModal }) {
             </li>
           </TaskList>
         </InputContainer>
-        <SaveButton id="work" onClick={handleClick}>
+        <SaveButton data-modal="work" onClick={handleClick}>
           Save
         </SaveButton>
       </Dialog>

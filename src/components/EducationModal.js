@@ -9,6 +9,7 @@ import {
   Dialog,
   SaveButton,
 } from "./StyledUtils"
+import { ReactComponent as Close } from "../assets/close-24px.svg"
 
 export default function EducationModal({ addEducation, handleModal }) {
   const [education, setEducation] = useState({
@@ -35,7 +36,10 @@ export default function EducationModal({ addEducation, handleModal }) {
   return (
     <Modal>
       <Dialog>
-        <ModalHeader>EDUCATION</ModalHeader>
+        <div>
+          <ModalHeader>EDUCATION</ModalHeader>
+          <Close onClick={handleModal} data-modal="education" />
+        </div>
         <InputContainer>
           <label htmlFor="name">
             <Company />
