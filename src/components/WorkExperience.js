@@ -34,7 +34,15 @@ export default function WorkExperience({
   displayModal,
   handleModal,
 }) {
-  const [displayIcons, setDisplayIcons] = useState(false)
+  const [displayActions, setDisplayActions] = useState(false)
+
+  const handleMouseOver = (e) => {
+    setDisplayActions(true)
+  }
+
+  const handleMouseOut = (e) => {
+    setDisplayActions(false)
+  }
 
   return (
     <div>
@@ -46,9 +54,10 @@ export default function WorkExperience({
         />
       )}
       {workExperience.map((exp) => (
-        <WorkContainer>
-          <Delete />
-          <Edit />
+        <WorkContainer
+          onMouseEnter={handleMouseOver}
+          onMouseOut={handleMouseOut}
+        >
           <WorkTitle>{exp.title}</WorkTitle>
           <WorkHeader>{exp.company}</WorkHeader>
           <Dates>
@@ -59,6 +68,12 @@ export default function WorkExperience({
               <li key={uuidv4()}>{t}</li>
             ))}
           </Tasks>
+          {displayActions && (
+            <div>
+              <Delete />
+              <Edit />
+            </div>
+          )}
         </WorkContainer>
       ))}
       <Button id="work" onClick={handleModal}>

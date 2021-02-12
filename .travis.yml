@@ -1,6 +1,8 @@
 language: node_js
 node_js:
 - node
+env:
+-production
 script:
 - yarn install
 - yarn run build
