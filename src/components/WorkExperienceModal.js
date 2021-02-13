@@ -89,7 +89,7 @@ export default function WorkExperienceModal({
     }
   }
   return (
-    <Modal>
+    <Modal onClick={handleClose}>
       <Dialog>
         <div>
           <ModalHeader>WORK EXPERIENCE</ModalHeader>
