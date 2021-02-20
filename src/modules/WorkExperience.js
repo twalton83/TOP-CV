@@ -13,4 +13,9 @@ export default class WorkExperience {
   removeTask(id) {
     this.tasks = this.tasks.filter((t) => t.id !== id)
   }
+
+  edit(changes) {
+    // push changes into array
+    // iterate through changes and update this.changedField
+  }
 }

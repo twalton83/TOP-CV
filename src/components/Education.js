@@ -29,11 +29,11 @@ export default function Education({
       {education.map((edu) => (
         <div>
           <EducationHeader>{edu.name.toUpperCase()}</EducationHeader>
-          {edu.startDate && (
+          {/* {edu.startDate && (
             <Dates>
               {edu.startDate} - {edu.endDate || "Current"}
             </Dates>
-          )}
+          )} */}
           <p>{edu.degree}</p>
         </div>
       ))}

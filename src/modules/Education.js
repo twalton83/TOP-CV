@@ -5,4 +5,9 @@ export default class Education {
     this.endDate = endDate
     this.degree = degree
   }
+
+  edit(changes) {
+    // push changes into array
+    // iterate through changes and update this.changedField
+  }
 }

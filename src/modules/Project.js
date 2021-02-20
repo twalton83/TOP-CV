@@ -5,4 +5,9 @@ export default class Project {
     this.endDate = endDate
     this.tasks = tasks
   }
+
+  edit(changes) {
+    // push changes into array
+    // iterate through changes and update this.changedField
+  }
 }

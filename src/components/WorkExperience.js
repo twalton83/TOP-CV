@@ -82,9 +82,7 @@ export default function WorkExperience({
         >
           <WorkTitle>{exp.title}</WorkTitle>
           <WorkHeader>{exp.company}</WorkHeader>
-          <Dates>
-            {exp.startDate} - {exp.endDate || "Current"}
-          </Dates>
+          <Dates>{/* {exp.startDate} - {exp.endDate || "Current"} */}</Dates>
           <Tasks>
             {exp.tasks.map((t) => (
               <li key={uuidv4()}>{t}</li>

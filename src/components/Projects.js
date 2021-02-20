@@ -65,11 +65,11 @@ export default function Projects({
       {projects.map((proj) => (
         <div>
           <ProjectHeader>{proj.name.toUpperCase()}</ProjectHeader>
-          {proj.startDate && (
+          {/* {proj.startDate && (
             <Dates>
               {proj.startDate} - {proj.endDate || "Current"}
             </Dates>
-          )}
+          )} */}
           {proj.tasks.length && (
             <Tasks>
               {proj.tasks.map((t) => (

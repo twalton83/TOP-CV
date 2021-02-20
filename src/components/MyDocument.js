@@ -3,14 +3,19 @@ import styled from "styled-components"
 import ResumeHeader from "./ResumeHeader"
 import ResumeContact from "./ResumeContact"
 import ResumeBody from "./ResumeBody"
+import {
+  generateWork,
+  generateEducation,
+  generateProject,
+} from "../modules/seeds"
 
 const ResumeSheet = styled.section`
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 1150px;
   max-height: 3300px;
   max-width: 2550px;
-  height: 100vh;
+  height: auto;
   width: 70vw;
   border: 1px solid black;
   background-color: white;
@@ -42,10 +47,10 @@ export default function MyDocument() {
     education: true,
   })
 
-  const [workExperience, setWorkExperience] = useState([])
+  const [workExperience, setWorkExperience] = useState(generateWork())
   const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"])
-  const [education, setEducation] = useState([])
-  const [projects, setProjects] = useState([])
+  const [education, setEducation] = useState(generateEducation())
+  const [projects, setProjects] = useState(generateProject())
   const [modalShow, setModalShow] = useState({
     work: false,
     project: false,
