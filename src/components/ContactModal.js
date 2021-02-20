@@ -250,7 +250,7 @@ export default function ContactModal({
             </label>
           </InputContainer>
         )}
-        <SaveButton id="contact" onClick={handleModal}>
+        <SaveButton data-modal="contact" onClick={handleModal}>
           Save
         </SaveButton>
       </Dialog>

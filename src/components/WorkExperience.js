@@ -30,6 +30,7 @@ const Tasks = styled.ul`
 
 export default function WorkExperience({
   addWorkExp,
+  editWork,
   workExperience,
   displayModal,
   handleModal,
@@ -55,12 +56,14 @@ export default function WorkExperience({
   }
 
   const handleClose = (e) => {
+    if (!e.target.classList.contains("close")) return
     handleModal(e)
     setEditMode(false)
     setExperienceToEdit(null)
   }
 
   const handleEditClick = (e) => {
+    e.stopPropagation()
     const experience = workExperience.filter(
       (work) => e.currentTarget.dataset.workid === work.id
     )[0]
@@ -110,6 +113,7 @@ export default function WorkExperience({
       {displayModal.work && (
         <WorkExperienceModal
           editMode={editMode}
+          editWork={editWork}
           experience={experienceToEdit}
           addWorkExp={addWorkExp}
           handleClose={handleClose}

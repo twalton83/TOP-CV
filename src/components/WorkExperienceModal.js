@@ -30,7 +30,7 @@ export default function WorkExperienceModal({
   addWorkExp,
   handleClose,
   editMode,
-  edit,
+  editWork,
 }) {
   const [displayAdd, setDisplayAdd] = useState(true)
 
@@ -47,11 +47,12 @@ export default function WorkExperienceModal({
 
   const handleClick = (e) => {
     // if editMode
-
     if (editMode) {
       // set up project to parent state and return
-      edit(e.currentTarget.dataset.id)
-      handleClose()
+      console.log("edit mode")
+      editWork(e.currentTarget.dataset.id, exp)
+      handleClose(e)
+      return
     }
     if (exp.startDate === "" || exp.company === "" || exp.title === "") return
     const { company, title, startDate, endDate, tasks } = exp
@@ -73,7 +74,7 @@ export default function WorkExperienceModal({
     })
   }
   // implement enter press to add task
-  const handleSubmit = (e) => {
+  const handleTaskSubmit = (e) => {
     e.persist()
     if (e.key === "Enter" || e.type === "blur") {
       if (exp.currentTask === "") {
@@ -89,11 +90,11 @@ export default function WorkExperienceModal({
     }
   }
   return (
-    <Modal onClick={handleClose}>
+    <Modal className="close" onClick={handleClose}>
       <Dialog>
         <div>
           <ModalHeader>WORK EXPERIENCE</ModalHeader>
-          <Close data-modal="work" onClick={handleClose} />
+          <Close className="close" data-modal="work" onClick={handleClose} />
         </div>
         <InputContainer>
           <label htmlFor="company">
@@ -151,13 +152,18 @@ export default function WorkExperienceModal({
                 name="currentTask"
                 value={exp.currentTask}
                 onChange={handleChange}
-                onKeyPress={handleSubmit}
-                onBlur={handleSubmit}
+                onKeyPress={handleTaskSubmit}
+                onBlur={handleTaskSubmit}
               />
             </li>
           </TaskList>
         </InputContainer>
-        <SaveButton data-modal="work" onClick={handleClick}>
+        <SaveButton
+          className="close"
+          data-modal="work"
+          data-id={exp.id}
+          onClick={handleClick}
+        >
           Save
         </SaveButton>
       </Dialog>

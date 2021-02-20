@@ -29,7 +29,7 @@ export default function ResumeContact({
   return (
     <Section>
       {noItems && (
-        <Button id="contact" onClick={handleModal}>
+        <Button data-modal="contact" onClick={handleModal}>
           ADD CONTACTS
         </Button>
       )}

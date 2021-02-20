@@ -14,6 +14,7 @@ export default function ResumeBody({
   addSkill,
   skills,
   workExperience,
+  editWorkExp,
   education,
   projects,
   sectionDisplay,
@@ -26,32 +27,40 @@ export default function ResumeBody({
 }) {
   return (
     <Container>
-      {sectionDisplay.work && (
-        <WorkExperience
-          deleteWork={deleteWork}
-          addWorkExp={addWorkExp}
-          displayModal={displayModal}
-          handleModal={handleModal}
-          workExperience={workExperience}
-        />
-      )}
-      {sectionDisplay.skills && <Skills addSkill={addSkill} skills={skills} />}
-      {sectionDisplay.education && (
-        <Education
-          addEducation={addEducation}
-          displayModal={displayModal}
-          handleModal={handleModal}
-          education={education}
-        />
-      )}
-      {sectionDisplay.projects && (
-        <Projects
-          addProj={addProj}
-          displayModal={displayModal}
-          handleModal={handleModal}
-          projects={projects}
-        />
-      )}
+      <section>
+        {sectionDisplay.work && (
+          <WorkExperience
+            editWork={editWorkExp}
+            deleteWork={deleteWork}
+            addWorkExp={addWorkExp}
+            displayModal={displayModal}
+            handleModal={handleModal}
+            workExperience={workExperience}
+          />
+        )}
+        {sectionDisplay.education && (
+          <Education
+            addEducation={addEducation}
+            displayModal={displayModal}
+            handleModal={handleModal}
+            education={education}
+          />
+        )}
+      </section>
+      <section>
+        {sectionDisplay.skills && (
+          <Skills addSkill={addSkill} skills={skills} />
+        )}
+
+        {sectionDisplay.projects && (
+          <Projects
+            addProj={addProj}
+            displayModal={displayModal}
+            handleModal={handleModal}
+            projects={projects}
+          />
+        )}
+      </section>
     </Container>
   )
 }

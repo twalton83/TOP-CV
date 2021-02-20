@@ -87,8 +87,8 @@ export default function MyDocument() {
   }
 
   const handleModalShow = (e) => {
+    if (!e.currentTarget.dataset.modal) return
     const { modal } = e.currentTarget.dataset
-    console.log(modal)
     setModalShow({
       ...modalShow,
       [modal]: !modalShow[modal],
@@ -100,11 +100,11 @@ export default function MyDocument() {
     setWorkExperience(filteredWork)
   }
 
-  const edit = (id) => {
-    const experiences = [...workExperience]
-    const experienceToEdit = experiences.filter((exp) => id === exp.id)[0]
-
-    // iterate over object to edit the properties
+  const editWorkExp = (id, updates) => {
+    const experiences = workExperience.filter((exp) => exp.id !== id)
+    const experienceToEdit = workExperience.filter((exp) => id === exp.id)[0]
+    experienceToEdit.edit(updates)
+    setWorkExperience([...experiences, experienceToEdit])
   }
 
   return (
@@ -122,6 +122,7 @@ export default function MyDocument() {
       <ResumeBody
         addSkill={addSkill}
         deleteWork={deleteWork}
+        editWorkExp={editWorkExp}
         addWorkExp={addWorkExperience}
         addEducation={addEducation}
         displayModal={modalShow}

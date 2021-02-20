@@ -34,6 +34,7 @@ const Modal = styled.div`
   z-index: 1;
   width: 100vw;
   height: 100%;
+  margin: 0;
   min-height: 107vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -59,6 +60,9 @@ const Dialog = styled.div`
     fill: white;
     height: 24px;
     width: auto;
+    path {
+      pointer-events: none;
+    }
   }
 
   label {
