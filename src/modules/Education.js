@@ -7,7 +7,10 @@ export default class Education {
   }
 
   edit(changes) {
-    // push changes into array
-    // iterate through changes and update this.changedField
+    for (const change in changes) {
+      if (Object.prototype.hasOwnProperty.call(changes, change)) {
+        this[change] = changes[change]
+      }
+    }
   }
 }
