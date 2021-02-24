@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
-import { Button, Header } from "./StyledUtils"
+import { format } from "date-fns"
+import { Button, Header, InfoContainer } from "./StyledUtils"
 import WorkExperienceModal from "./WorkExperienceModal"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
@@ -80,12 +81,15 @@ export default function WorkExperience({
           key={exp.id}
           onMouseOver={handleMouseOver}
           onFocus={handleMouseOver}
-          // onMouseLeave={handleMouseLeave}
-          // onBlur={handleMouseLeave}
+          onMouseLeave={handleMouseLeave}
+          onBlur={handleMouseLeave}
         >
           <WorkTitle>{exp.title}</WorkTitle>
           <WorkHeader>{exp.company}</WorkHeader>
-          <Dates>{/* {exp.startDate} - {exp.endDate || "Current"} */}</Dates>
+          <Dates>
+            {format(exp.startDate, "P")} -{" "}
+            {format(exp.endDate, "P") || "Current"}
+          </Dates>
           <Tasks>
             {exp.tasks.map((t) => (
               <li key={uuidv4()}>{t}</li>

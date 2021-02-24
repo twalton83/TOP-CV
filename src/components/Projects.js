@@ -1,7 +1,10 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { format } from "date-fns"
 import ProjectModal from "./ProjectModal"
 import { Header, Button } from "./StyledUtils"
+import { ReactComponent as Edit } from "../assets/edit-24px.svg"
+import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
 
 const ProjectHeader = styled.p`
   font-size: 1.2rem;
@@ -22,6 +25,7 @@ export default function Projects({
   projects,
 }) {
   const [displayAdd, setDisplayAdd] = useState(true)
+  const [displayActions, setDisplayActions] = useState(true)
   const [exp, setExp] = useState({
     company: "",
     title: "",
@@ -54,6 +58,14 @@ export default function Projects({
     }
   }
 
+  const handleDelete = (e) => {
+    console.log("delete")
+  }
+
+  const handleEditClick = (e) => {
+    console.log("edit")
+  }
+
   return (
     <div>
       <Header color="#284B63">PROJECTS</Header>
@@ -65,17 +77,32 @@ export default function Projects({
       {projects.map((proj) => (
         <div>
           <ProjectHeader>{proj.name.toUpperCase()}</ProjectHeader>
-          {/* {proj.startDate && (
+          {proj.startDate && (
             <Dates>
-              {proj.startDate} - {proj.endDate || "Current"}
+              {format(proj.startDate, "P")} -
+              {format(proj.endDate, "P") || "Current"}
             </Dates>
-          )} */}
+          )}
           {proj.tasks.length && (
             <Tasks>
               {proj.tasks.map((t) => (
                 <li>{t}</li>
               ))}
             </Tasks>
+          )}
+          {displayActions && (
+            <div>
+              <Delete
+                data-eduid={proj.id}
+                style={{ fill: "red" }}
+                onClick={handleDelete}
+              />
+              <Edit
+                data-eduid={proj.id}
+                data-modal="work"
+                onClick={handleEditClick}
+              />
+            </div>
           )}
         </div>
       ))}

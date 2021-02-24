@@ -81,6 +81,10 @@ export default function MyDocument() {
     setSkills([...skills, skill])
   }
 
+  const deleteSkill = (skill) => {
+    setSkills(skills.filter((s) => s !== skill))
+  }
+
   const handleContactInfo = (e) => {
     const contact = contactInfo[e.target.name]
     setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
@@ -121,6 +125,7 @@ export default function MyDocument() {
       />
       <ResumeBody
         addSkill={addSkill}
+        deleteSkill={deleteSkill}
         deleteWork={deleteWork}
         editWorkExp={editWorkExp}
         addWorkExp={addWorkExperience}

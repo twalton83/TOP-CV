@@ -133,6 +133,10 @@ const DatePicker = styled.input`
   }
 `
 
+const InfoContainer = styled.div`
+  text-align: left;
+`
+
 export {
   Header,
   FlexWrapper,
@@ -142,5 +146,6 @@ export {
   Dialog,
   SaveButton,
   InputContainer,
+  InfoContainer,
   DatePicker,
 }

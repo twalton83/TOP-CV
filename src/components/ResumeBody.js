@@ -12,6 +12,7 @@ const Container = styled.div`
 
 export default function ResumeBody({
   addSkill,
+  deleteSkill,
   skills,
   workExperience,
   editWorkExp,
@@ -49,7 +50,11 @@ export default function ResumeBody({
       </section>
       <section>
         {sectionDisplay.skills && (
-          <Skills addSkill={addSkill} skills={skills} />
+          <Skills
+            addSkill={addSkill}
+            deleteSkill={deleteSkill}
+            skills={skills}
+          />
         )}
 
         {sectionDisplay.projects && (

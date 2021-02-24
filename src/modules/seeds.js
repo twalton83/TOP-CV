@@ -28,7 +28,7 @@ const generateProject = () => {
   const arr = []
   for (let i = 0; i < 3; i++) {
     arr.push(
-      new Project("Project", "Title", new Date("01-1-2018"), new Date(), [
+      new Project("Project", new Date("01-1-2018"), new Date(), [
         "test",
         "test",
         "test",

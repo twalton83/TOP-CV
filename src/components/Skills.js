@@ -31,7 +31,7 @@ const SkillAddContainer = styled.div`
   }
 `
 
-export default function Skills({ addSkill, skills }) {
+export default function Skills({ addSkill, deleteSkill, skills }) {
   const [displayAdd, setDisplayAdd] = useState(false)
   const [newSkill, setnewSkill] = useState("")
 
@@ -48,11 +48,15 @@ export default function Skills({ addSkill, skills }) {
   const handleChange = (e) => {
     setnewSkill(e.target.value)
   }
+  const handleSkillDelete = (e) => {
+    e.stopPropagation()
+    deleteSkill(e.target.dataset.skill)
+  }
 
   const handleSubmit = (e) => {
     e.persist()
     if (e.key === "Enter" || e.type === "blur") {
-      if (newSkill === "") {
+      if (newSkill === "" || skills.includes(newSkill)) {
         setDisplayAdd(false)
         return
       }
@@ -67,7 +71,12 @@ export default function Skills({ addSkill, skills }) {
       <Header color="#284B63">SKILLS</Header>
       <SkillBlockContainer onClick={handleDisplay}>
         {skills.map((skill) => (
-          <SkillBlock skill={skill} bgcolor="#989da6" color="#FFF" />
+          <SkillBlock
+            handleDelete={handleSkillDelete}
+            skill={skill}
+            bgcolor="#989da6"
+            color="#FFF"
+          />
         ))}
         {displayAdd && (
           <SkillInput
