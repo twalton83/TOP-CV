@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 
 const Block = styled.div`
@@ -32,16 +32,24 @@ const Block = styled.div`
 `
 
 export default function SkillBlock({ handleDelete, skill, bgcolor, color }) {
+  const [displayBadge, setDisplayBadge] = useState(false)
   return (
-    <Block bgcolor={bgcolor} color={color}>
-      <button
-        type="button"
-        data-skill={skill}
-        className="badge"
-        onClick={handleDelete}
-      >
-        X
-      </button>
+    <Block
+      onMouseEnter={() => setDisplayBadge(true)}
+      onMouseLeave={() => setDisplayBadge(false)}
+      bgcolor={bgcolor}
+      color={color}
+    >
+      {displayBadge && (
+        <button
+          type="button"
+          data-skill={skill}
+          className="badge"
+          onClick={handleDelete}
+        >
+          X
+        </button>
+      )}
       <p>{skill}</p>
     </Block>
   )

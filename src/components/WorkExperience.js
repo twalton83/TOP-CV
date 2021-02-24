@@ -1,33 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { v4 as uuidv4 } from "uuid"
-import { format } from "date-fns"
+
 import { Button, Header, InfoContainer } from "./StyledUtils"
 import WorkExperienceModal from "./WorkExperienceModal"
-import { ReactComponent as Edit } from "../assets/edit-24px.svg"
-import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
-
-const WorkHeader = styled.p`
-  font-size: 1.4rem;
-  margin: 0;
-`
-const WorkTitle = styled.p`
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin: 0;
-`
-
-const WorkContainer = styled.div`
-  text-align: left;
-`
-const Dates = styled.em`
-  font-size: 1rem;
-`
-
-const Tasks = styled.ul`
-  font-size: 1rem;
-  padding-left: 20px;
-`
+import WorkExperienceItem from "./WorkExperienceItem"
 
 export default function WorkExperience({
   addWorkExp,
@@ -37,20 +13,9 @@ export default function WorkExperience({
   handleModal,
   deleteWork,
 }) {
-  const [displayActions, setDisplayActions] = useState(true)
   const [editMode, setEditMode] = useState(false)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
-
-  const handleMouseOver = (e) => {
-    e.stopPropagation()
-    setDisplayActions(true)
-  }
-
-  const handleMouseLeave = (e) => {
-    e.stopPropagation()
-    setDisplayActions(false)
-  }
 
   const handleDelete = (e) => {
     deleteWork(e.currentTarget.dataset.workid)
@@ -77,39 +42,11 @@ export default function WorkExperience({
     <div>
       <Header color="#284B63">WORK EXPERIENCE</Header>
       {workExperience.map((exp) => (
-        <WorkContainer
-          key={exp.id}
-          onMouseOver={handleMouseOver}
-          onFocus={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-          onBlur={handleMouseLeave}
-        >
-          <WorkTitle>{exp.title}</WorkTitle>
-          <WorkHeader>{exp.company}</WorkHeader>
-          <Dates>
-            {format(exp.startDate, "P")} -{" "}
-            {format(exp.endDate, "P") || "Current"}
-          </Dates>
-          <Tasks>
-            {exp.tasks.map((t) => (
-              <li key={uuidv4()}>{t}</li>
-            ))}
-          </Tasks>
-          {displayActions && (
-            <div>
-              <Delete
-                data-workid={exp.id}
-                style={{ fill: "red" }}
-                onClick={handleDelete}
-              />
-              <Edit
-                data-workid={exp.id}
-                data-modal="work"
-                onClick={handleEditClick}
-              />
-            </div>
-          )}
-        </WorkContainer>
+        <WorkExperienceItem
+          handleDelete={handleDelete}
+          handleEditClick={handleEditClick}
+          experience={exp}
+        />
       ))}
       <Button data-modal="work" onClick={handleModal}>
         ADD AN EXPERIENCE

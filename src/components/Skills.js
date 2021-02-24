@@ -37,10 +37,6 @@ export default function Skills({ addSkill, deleteSkill, skills }) {
 
   // on click, change from a div to an input
 
-  // state should pop up with an add skill input that gets added to the end
-
-  // when hit enter or lose focus, skill is added
-
   const handleDisplay = () => {
     setDisplayAdd(true)
   }
@@ -94,7 +90,10 @@ export default function Skills({ addSkill, deleteSkill, skills }) {
         </SkillAddContainer>
       )}
 
-      {!skills.length && <Button>ADD A SKILL</Button>}
+      {!skills.length ||
+        (!displayAdd && (
+          <Button onClick={() => setDisplayAdd(true)}>ADD A SKILL</Button>
+        ))}
     </Container>
   )
 }
