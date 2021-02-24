@@ -6,7 +6,7 @@ const generateWork = () => {
   const arr = []
   for (let i = 0; i < 3; i++) {
     arr.push(
-      new Work("Company", "Title", new Date("01-1-2018"), new Date(), [
+      new Work(`Company ${i}`, "Title", new Date("01-1-2018"), new Date(), [
         "test",
         "test",
         "test",
@@ -19,7 +19,9 @@ const generateWork = () => {
 const generateEducation = () => {
   const arr = []
   for (let i = 0; i < 3; i++) {
-    arr.push(new Education("School", new Date("01-1-2018"), new Date(), "BA"))
+    arr.push(
+      new Education(`School ${i}`, new Date("01-1-2018"), new Date(), "BA")
+    )
   }
   return arr
 }
@@ -28,7 +30,7 @@ const generateProject = () => {
   const arr = []
   for (let i = 0; i < 3; i++) {
     arr.push(
-      new Project("Project", new Date("01-1-2018"), new Date(), [
+      new Project(`Project ${i}`, new Date("01-1-2018"), new Date(), [
         "test",
         "test",
         "test",
