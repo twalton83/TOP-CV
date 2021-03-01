@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import Project from "../modules/Project"
 import {
@@ -9,6 +9,7 @@ import {
   SaveButton,
 } from "./StyledUtils"
 import { ReactComponent as Close } from "../assets/close-24px.svg"
+import { ModalContext } from "./context"
 
 export default function ProjectModal({ addProj, handleModal }) {
   const [proj, setProj] = useState({
@@ -17,10 +18,11 @@ export default function ProjectModal({ addProj, handleModal }) {
     endDate: "",
     currentTask: "",
   })
+  const { modalShow, toggleModal } = useContext(ModalContext)
 
   const handleClick = (e) => {
     const { name, startDate, endDate, currentTask } = proj
-    handleModal(e)
+    toggleModal(e)
     const project = new Project(name, startDate, endDate, [currentTask])
     addProj(project)
   }
@@ -37,7 +39,7 @@ export default function ProjectModal({ addProj, handleModal }) {
       <Dialog>
         <div>
           <ModalHeader>Project</ModalHeader>
-          <Close data-modal="project" onClick={handleModal} />
+          <Close data-modal="project" onClick={toggleModal} />
         </div>
 
         <InputContainer>

@@ -108,7 +108,7 @@ const SaveButton = styled.button`
 `
 
 export default function ContactModal({ contactInfo, handleContactInfo }) {
-  const { modalShow, toggleModal } = useContext(ModalContext)
+  const { toggleModal } = useContext(ModalContext)
   const [showGeneralContact, setShowGeneralContact] = useState(true)
   const {
     email,

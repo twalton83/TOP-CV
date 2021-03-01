@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { format } from "date-fns"
 import ProjectModal from "./ProjectModal"
 import { Header, Button } from "./StyledUtils"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
+import { ModalContext } from "./context"
 
 const ProjectHeader = styled.p`
   font-size: 1.2rem;
@@ -18,14 +19,10 @@ const Tasks = styled.ul`
   font-size: 1rem;
 `
 
-export default function Projects({
-  addProj,
-  displayModal,
-  handleModal,
-  projects,
-}) {
+export default function Projects({ addProj, projects }) {
   const [displayAdd, setDisplayAdd] = useState(true)
   const [displayActions, setDisplayActions] = useState(true)
+  const { project, toggleModal } = useContext(ModalContext)
   const [exp, setExp] = useState({
     company: "",
     title: "",
@@ -69,11 +66,6 @@ export default function Projects({
   return (
     <div>
       <Header color="#284B63">PROJECTS</Header>
-      {!projects.length && (
-        <Button data-modal="project" onClick={handleModal}>
-          ADD A PROJECT
-        </Button>
-      )}
       {projects.map((proj) => (
         <div>
           <ProjectHeader>{proj.name.toUpperCase()}</ProjectHeader>
@@ -106,9 +98,10 @@ export default function Projects({
           )}
         </div>
       ))}
-      {displayModal.project && (
-        <ProjectModal addProj={addProj} handleModal={handleModal} />
-      )}
+      <Button data-modal="project" onClick={toggleModal}>
+        ADD A PROJECT
+      </Button>
+      {project && <ProjectModal addProj={addProj} />}
     </div>
   )
 }
