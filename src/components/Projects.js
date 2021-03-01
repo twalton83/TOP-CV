@@ -22,7 +22,7 @@ const Tasks = styled.ul`
 export default function Projects({ addProj, projects }) {
   const [displayAdd, setDisplayAdd] = useState(true)
   const [displayActions, setDisplayActions] = useState(true)
-  const { project, toggleModal } = useContext(ModalContext)
+  const { projectShow, toggleModal } = useContext(ModalContext)
   const [exp, setExp] = useState({
     company: "",
     title: "",
@@ -101,7 +101,7 @@ export default function Projects({ addProj, projects }) {
       <Button data-modal="project" onClick={toggleModal}>
         ADD A PROJECT
       </Button>
-      {project && <ProjectModal addProj={addProj} />}
+      {projectShow && <ProjectModal addProj={addProj} />}
     </div>
   )
 }

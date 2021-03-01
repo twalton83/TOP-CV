@@ -14,7 +14,7 @@ export default function WorkExperience({
   const [editMode, setEditMode] = useState(false)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
-  const { work, toggleModal } = useContext(ModalContext)
+  const { workShow, toggleModal } = useContext(ModalContext)
   const handleDelete = (e) => {
     deleteWork(e.currentTarget.dataset.workid)
   }
@@ -49,7 +49,7 @@ export default function WorkExperience({
       <Button data-modal="work" onClick={toggleModal}>
         ADD AN EXPERIENCE
       </Button>
-      {work && (
+      {workShow && (
         <WorkExperienceModal
           editMode={editMode}
           editWork={editWork}

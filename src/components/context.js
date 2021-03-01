@@ -2,10 +2,10 @@
 import React from "react"
 
 const ModalContext = React.createContext({
-  work: false,
-  project: false,
-  contact: false,
-  education: false,
+  workShow: false,
+  projectShow: false,
+  contactShow: false,
+  educationShow: false,
   toggleModal: () => { },
 })
 ModalContext.displayName = "Modal"

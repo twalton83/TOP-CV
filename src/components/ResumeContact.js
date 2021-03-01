@@ -17,7 +17,7 @@ const Section = styled.section`
 
 export default function ResumeContact({ contactItems, handleContactInfo }) {
   const [noItems, setNoItems] = useState(null)
-  const { contact, toggleModal } = useContext(ModalContext)
+  const { contactShow, toggleModal } = useContext(ModalContext)
 
   useEffect(() => {
     setNoItems(Object.values(contactItems).every((i) => i === ""))
@@ -32,7 +32,7 @@ export default function ResumeContact({ contactItems, handleContactInfo }) {
       )}
 
       {!noItems && <ContactItemList items={contactItems} />}
-      {contact && (
+      {contactShow && (
         <ContactModal
           contactInfo={contactItems}
           handleContactInfo={handleContactInfo}

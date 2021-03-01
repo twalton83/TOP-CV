@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
 import Education from "../modules/Education"
@@ -10,6 +10,7 @@ import {
   SaveButton,
 } from "./StyledUtils"
 import { ReactComponent as Close } from "../assets/close-24px.svg"
+import { ModalContext } from "./context"
 
 export default function EducationModal({ addEducation, handleModal }) {
   const [education, setEducation] = useState({
@@ -19,9 +20,10 @@ export default function EducationModal({ addEducation, handleModal }) {
     degree: "",
   })
 
+  const { toggleModal } = useContext(ModalContext)
   const handleClick = (e) => {
     const { name, startDate, endDate, degree } = education
-    handleModal(e)
+    toggleModal(e)
     const school = new Education(name, startDate, endDate, degree)
     addEducation(school)
   }
@@ -38,7 +40,7 @@ export default function EducationModal({ addEducation, handleModal }) {
       <Dialog>
         <div>
           <ModalHeader>EDUCATION</ModalHeader>
-          <Close onClick={handleModal} data-modal="education" />
+          <Close data-modal="education" onClick={toggleModal} />
         </div>
         <InputContainer>
           <label htmlFor="name">

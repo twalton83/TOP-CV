@@ -53,17 +53,17 @@ export default function MyDocument() {
   const [education, setEducation] = useState(generateEducation())
   const [projects, setProjects] = useState(generateProject())
   const [modalShow, setModalShow] = useState({
-    work: false,
-    project: false,
-    contact: false,
-    education: false,
+    workShow: false,
+    projectShow: false,
+    contactShow: false,
+    educationShow: false,
   })
 
   const toggleModal = (e) => {
     const { modal } = e.target.dataset
     setModalShow({
       ...modalShow,
-      [modal]: !modalShow[modal],
+      [`${modal}Show`]: !modalShow[`${modal}Show`],
     })
   }
   const handlePersonalInput = (e) => {
@@ -103,7 +103,7 @@ export default function MyDocument() {
     const { modal } = e.currentTarget.dataset
     setModalShow({
       ...modalShow,
-      [modal]: !modalShow[modal],
+      [`${modal}Show`]: !modalShow[`${modal}Show`],
     })
   }
 

@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { format } from "date-fns"
 import { Header, Button } from "./StyledUtils"
 import EducationModal from "./EducationModal"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
+import { ModalContext } from "./context"
 
 const EducationHeader = styled.p`
   font-size: 1.2rem;
@@ -20,6 +21,7 @@ export default function Education({
   handleModal,
   education,
 }) {
+  const { educationShow, toggleModal } = useContext(ModalContext)
   const [displayActions, setDisplayActions] = useState(true)
   const [editMode, setEditMode] = useState(false)
 
@@ -77,10 +79,10 @@ export default function Education({
           )}
         </div>
       ))}
-      {displayModal.education && (
+      {educationShow && (
         <EducationModal addEducation={addEducation} handleModal={handleModal} />
       )}
-      <Button data-modal="education" onClick={handleModal}>
+      <Button data-modal="education" onClick={toggleModal}>
         ADD EDUCATION
       </Button>
     </div>
