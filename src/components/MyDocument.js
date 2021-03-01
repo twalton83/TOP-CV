@@ -98,15 +98,6 @@ export default function MyDocument() {
     setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
   }
 
-  const handleModalShow = (e) => {
-    if (!e.currentTarget.dataset.modal) return
-    const { modal } = e.currentTarget.dataset
-    setModalShow({
-      ...modalShow,
-      [`${modal}Show`]: !modalShow[`${modal}Show`],
-    })
-  }
-
   const deleteWork = (id) => {
     const filteredWork = workExperience.filter((exp) => id !== exp.id)
     setWorkExperience(filteredWork)
@@ -137,7 +128,6 @@ export default function MyDocument() {
           editWorkExp={editWorkExp}
           addWorkExp={addWorkExperience}
           addEducation={addEducation}
-          displayModal={modalShow}
           skills={skills}
           workExperience={workExperience}
           addProj={addProj}

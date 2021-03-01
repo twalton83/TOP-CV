@@ -19,8 +19,6 @@ export default function ResumeBody({
   education,
   projects,
   sectionDisplay,
-  handleModal,
-  displayModal,
   addWorkExp,
   addProj,
   addEducation,
@@ -38,12 +36,7 @@ export default function ResumeBody({
           />
         )}
         {sectionDisplay.education && (
-          <Education
-            addEducation={addEducation}
-            displayModal={displayModal}
-            handleModal={handleModal}
-            education={education}
-          />
+          <Education addEducation={addEducation} education={education} />
         )}
       </section>
       <section>
@@ -56,12 +49,7 @@ export default function ResumeBody({
         )}
 
         {sectionDisplay.projects && (
-          <Projects
-            addProj={addProj}
-            displayModal={displayModal}
-            handleModal={handleModal}
-            projects={projects}
-          />
+          <Projects addProj={addProj} projects={projects} />
         )}
       </section>
     </Container>
