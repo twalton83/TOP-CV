@@ -34,8 +34,6 @@ export default function ResumeBody({
             editWork={editWorkExp}
             deleteWork={deleteWork}
             addWorkExp={addWorkExp}
-            displayModal={displayModal}
-            handleModal={handleModal}
             workExperience={workExperience}
           />
         )}

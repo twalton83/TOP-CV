@@ -1,29 +1,27 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
-
 import { Button, Header, InfoContainer } from "./StyledUtils"
 import WorkExperienceModal from "./WorkExperienceModal"
 import WorkExperienceItem from "./WorkExperienceItem"
+import { ModalContext } from "./context"
 
 export default function WorkExperience({
   addWorkExp,
   editWork,
   workExperience,
-  displayModal,
-  handleModal,
   deleteWork,
 }) {
   const [editMode, setEditMode] = useState(false)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
-
+  const { work, toggleModal } = useContext(ModalContext)
   const handleDelete = (e) => {
     deleteWork(e.currentTarget.dataset.workid)
   }
 
   const handleClose = (e) => {
     if (!e.target.classList.contains("close")) return
-    handleModal(e)
+    toggleModal(e)
     setEditMode(false)
     setExperienceToEdit(null)
   }
@@ -31,11 +29,11 @@ export default function WorkExperience({
   const handleEditClick = (e) => {
     e.stopPropagation()
     const experience = workExperience.filter(
-      (work) => e.currentTarget.dataset.workid === work.id
+      (workExp) => e.currentTarget.dataset.workid === workExp.id
     )[0]
     setEditMode(true)
     setExperienceToEdit(experience)
-    handleModal(e)
+    toggleModal(e)
   }
 
   return (
@@ -48,10 +46,10 @@ export default function WorkExperience({
           experience={exp}
         />
       ))}
-      <Button data-modal="work" onClick={handleModal}>
+      <Button data-modal="work" onClick={toggleModal}>
         ADD AN EXPERIENCE
       </Button>
-      {displayModal.work && (
+      {work && (
         <WorkExperienceModal
           editMode={editMode}
           editWork={editWork}

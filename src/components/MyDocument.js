@@ -127,8 +127,6 @@ export default function MyDocument() {
           handlePersonalInput={handlePersonalInput}
         />
         <ResumeContact
-          displayModal={modalShow.contact}
-          handleModal={handleModalShow}
           contactItems={contactInfo}
           handleContactInfo={handleContactInfo}
         />
@@ -140,7 +138,6 @@ export default function MyDocument() {
           addWorkExp={addWorkExperience}
           addEducation={addEducation}
           displayModal={modalShow}
-          handleModal={handleModalShow}
           skills={skills}
           workExperience={workExperience}
           addProj={addProj}
