@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import ContactModal from "./ContactModal"
 import ContactItemList from "./ContactItemList"
 import { Button } from "./StyledUtils"
+import { ModalContext } from "./context"
 
 const Section = styled.section`
   display: grid;
@@ -14,13 +15,9 @@ const Section = styled.section`
   border-bottom: 2px solid ${(props) => props.color};
 `
 
-export default function ResumeContact({
-  displayModal,
-  contactItems,
-  handleModal,
-  handleContactInfo,
-}) {
+export default function ResumeContact({ contactItems, handleContactInfo }) {
   const [noItems, setNoItems] = useState(null)
+  const { contact, toggleModal } = useContext(ModalContext)
 
   useEffect(() => {
     setNoItems(Object.values(contactItems).every((i) => i === ""))
@@ -29,19 +26,16 @@ export default function ResumeContact({
   return (
     <Section>
       {noItems && (
-        <Button data-modal="contact" onClick={handleModal}>
+        <Button data-modal="contact" onClick={toggleModal}>
           ADD CONTACTS
         </Button>
       )}
 
-      {!noItems && (
-        <ContactItemList items={contactItems} handleModal={handleModal} />
-      )}
-      {displayModal && (
+      {!noItems && <ContactItemList items={contactItems} />}
+      {contact && (
         <ContactModal
           contactInfo={contactItems}
           handleContactInfo={handleContactInfo}
-          handleModal={handleModal}
         />
       )}
     </Section>

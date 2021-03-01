@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { ReactComponent as Email } from "../assets/email-24px.svg"
 import { ReactComponent as Phone } from "../assets/smartphone-24px.svg"
@@ -9,6 +9,7 @@ import { ReactComponent as City } from "../assets/domain-24px.svg"
 import { ReactComponent as LinkedIn } from "../assets/linkedin.svg"
 import { ReactComponent as StackOverflow } from "../assets/stack-overflow.svg"
 import { ReactComponent as Github } from "../assets/github-logo.svg"
+import { ModalContext } from "./context"
 
 const List = styled.div`
   display: grid;
@@ -32,7 +33,8 @@ const ContactItem = styled.div`
   }
 `
 
-export default function ContactItemList({ items, handleModal }) {
+export default function ContactItemList({ items }) {
+  const { contact, toggleModal } = useContext(ModalContext)
   const icons = {
     github: <Github />,
     email: <Email />,
@@ -58,10 +60,10 @@ export default function ContactItemList({ items, handleModal }) {
     return arr
   }
   return (
-    <List onClick={handleModal}>
+    <List data-modal="contact" onClick={toggleModal}>
       {generateItems().map((item) => (
         <ContactItem
-          onClick={handleModal}
+          onClick={toggleModal}
           data-modal="contact"
           key={item.value}
         >

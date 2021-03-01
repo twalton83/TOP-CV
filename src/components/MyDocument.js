@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useReducer } from "react"
 import styled from "styled-components"
 import ResumeHeader from "./ResumeHeader"
 import ResumeContact from "./ResumeContact"
@@ -8,6 +8,7 @@ import {
   generateEducation,
   generateProject,
 } from "../modules/seeds"
+import { ModalContext, ExperienceContext } from "./context"
 
 const ResumeSheet = styled.section`
   display: flex;
@@ -58,6 +59,13 @@ export default function MyDocument() {
     education: false,
   })
 
+  const toggleModal = (e) => {
+    const { modal } = e.target.dataset
+    setModalShow({
+      ...modalShow,
+      [modal]: !modalShow[modal],
+    })
+  }
   const handlePersonalInput = (e) => {
     setPersonalInfo({
       ...personalInfo,
@@ -112,33 +120,35 @@ export default function MyDocument() {
   }
 
   return (
-    <ResumeSheet>
-      <ResumeHeader
-        personalInfo={personalInfo}
-        handlePersonalInput={handlePersonalInput}
-      />
-      <ResumeContact
-        displayModal={modalShow.contact}
-        handleModal={handleModalShow}
-        contactItems={contactInfo}
-        handleContactInfo={handleContactInfo}
-      />
-      <ResumeBody
-        addSkill={addSkill}
-        deleteSkill={deleteSkill}
-        deleteWork={deleteWork}
-        editWorkExp={editWorkExp}
-        addWorkExp={addWorkExperience}
-        addEducation={addEducation}
-        displayModal={modalShow}
-        handleModal={handleModalShow}
-        skills={skills}
-        workExperience={workExperience}
-        addProj={addProj}
-        projects={projects}
-        education={education}
-        sectionDisplay={sectionDisplay}
-      />
-    </ResumeSheet>
+    <ModalContext.Provider value={{ ...modalShow, toggleModal }}>
+      <ResumeSheet>
+        <ResumeHeader
+          personalInfo={personalInfo}
+          handlePersonalInput={handlePersonalInput}
+        />
+        <ResumeContact
+          displayModal={modalShow.contact}
+          handleModal={handleModalShow}
+          contactItems={contactInfo}
+          handleContactInfo={handleContactInfo}
+        />
+        <ResumeBody
+          addSkill={addSkill}
+          deleteSkill={deleteSkill}
+          deleteWork={deleteWork}
+          editWorkExp={editWorkExp}
+          addWorkExp={addWorkExperience}
+          addEducation={addEducation}
+          displayModal={modalShow}
+          handleModal={handleModalShow}
+          skills={skills}
+          workExperience={workExperience}
+          addProj={addProj}
+          projects={projects}
+          education={education}
+          sectionDisplay={sectionDisplay}
+        />
+      </ResumeSheet>
+    </ModalContext.Provider>
   )
 }

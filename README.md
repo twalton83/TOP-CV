@@ -3,9 +3,10 @@
 This is a React app that generates a CV for you based on your own customizations.
 To run this project, clone the repository and run `yarn start`. 
 
-## To-Do's and Nice-To-Haves
-- [ ] Refactor to use `useReducer` and break out more custom hooks where necessary
+## To-Do's 
+- [ ] Refactor to use `useReducer`, context, and break out more custom hooks where necessary
 - [ ] Implement React-to-PDF
+- [ ] Finish styling 
 
 ## Icon Attribution
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { ReactComponent as Email } from "../assets/email-24px.svg"
 import { ReactComponent as Phone } from "../assets/smartphone-24px.svg"
@@ -9,6 +9,7 @@ import { ReactComponent as City } from "../assets/domain-24px.svg"
 import { ReactComponent as LinkedIn } from "../assets/linkedin.svg"
 import { ReactComponent as StackOverflow } from "../assets/stack-overflow.svg"
 import { ReactComponent as Github } from "../assets/github-logo.svg"
+import { ModalContext } from "./context"
 
 const Modal = styled.div`
   z-index: 10;
@@ -106,11 +107,8 @@ const SaveButton = styled.button`
   font-size: 1.1rem;
 `
 
-export default function ContactModal({
-  contactInfo,
-  handleContactInfo,
-  handleModal,
-}) {
+export default function ContactModal({ contactInfo, handleContactInfo }) {
+  const { modalShow, toggleModal } = useContext(ModalContext)
   const [showGeneralContact, setShowGeneralContact] = useState(true)
   const {
     email,
@@ -250,7 +248,7 @@ export default function ContactModal({
             </label>
           </InputContainer>
         )}
-        <SaveButton data-modal="contact" onClick={handleModal}>
+        <SaveButton data-modal="contact" onClick={toggleModal}>
           Save
         </SaveButton>
       </Dialog>
