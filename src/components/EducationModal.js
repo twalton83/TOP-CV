@@ -9,7 +9,6 @@ import {
   Dialog,
   SaveButton,
 } from "./StyledUtils"
-import { ReactComponent as Close } from "../assets/close-24px.svg"
 import { ModalContext, ExperienceContext } from "./context"
 
 export default function EducationModal({ handleClose, editMode, experience }) {
@@ -57,9 +56,16 @@ export default function EducationModal({ handleClose, editMode, experience }) {
   return (
     <Modal>
       <Dialog>
+        <button
+          type="button"
+          className="closeButton close"
+          data-modal="education"
+          onClick={toggleModal}
+        >
+          X
+        </button>
         <div>
           <ModalHeader>EDUCATION</ModalHeader>
-          <Close data-modal="education" onClick={toggleModal} />
         </div>
         <InputContainer>
           <label htmlFor="name">

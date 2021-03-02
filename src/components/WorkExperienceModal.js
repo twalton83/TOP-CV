@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
-import { ReactComponent as Close } from "../assets/close-24px.svg"
 import WorkExperience from "../modules/WorkExperience"
 import {
   Modal,
@@ -32,6 +31,7 @@ export default function WorkExperienceModal({
   editMode,
 }) {
   const { dispatch } = useContext(ExperienceContext)
+  const { toggleModal } = useContext(ModalContext)
   const [displayAdd, setDisplayAdd] = useState(true)
 
   const [exp, setExp] = useState(
@@ -93,9 +93,16 @@ export default function WorkExperienceModal({
   return (
     <Modal className="close" onClick={handleClose}>
       <Dialog>
+        <button
+          type="button"
+          className="closeButton close"
+          data-modal="work"
+          onClick={toggleModal}
+        >
+          X
+        </button>
         <div>
           <ModalHeader>WORK EXPERIENCE</ModalHeader>
-          <Close className="close" data-modal="work" onClick={handleClose} />
         </div>
         <InputContainer>
           <label htmlFor="company">

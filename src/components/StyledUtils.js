@@ -43,6 +43,7 @@ const Modal = styled.div`
 `
 
 const Dialog = styled.div`
+  position: relative;
   z-index: 2;
   width: auto;
   max-width: 30vw;
@@ -86,6 +87,23 @@ const Dialog = styled.div`
     ::placeholder {
       font-size: 1.2rem;
     }
+  }
+  .header {
+    position: relative;
+  }
+  .closeButton {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0;
+    z-index: 999;
   }
 `
 
