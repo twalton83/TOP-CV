@@ -9,6 +9,7 @@ import {
   generateProject,
 } from "../modules/seeds"
 import { ModalContext, ExperienceContext } from "./context"
+import reducer from "../modules/reducer"
 
 const ResumeSheet = styled.section`
   display: flex;
@@ -48,10 +49,6 @@ export default function MyDocument() {
     education: true,
   })
 
-  const [workExperience, setWorkExperience] = useState(generateWork())
-  const [skills, setSkills] = useState(["React", "Javascript", "HTML", "CSS"])
-  const [education, setEducation] = useState(generateEducation())
-  const [projects, setProjects] = useState(generateProject())
   const [modalShow, setModalShow] = useState({
     workShow: false,
     projectShow: false,
@@ -73,69 +70,40 @@ export default function MyDocument() {
     })
   }
 
-  const addWorkExperience = (experience) => {
-    setWorkExperience([...workExperience, experience])
-  }
-
-  const addProj = (project) => {
-    setProjects([...projects, project])
-  }
-
-  const addEducation = (school) => {
-    setEducation([...education, school])
-  }
-
-  const addSkill = (skill) => {
-    setSkills([...skills, skill])
-  }
-
-  const deleteSkill = (skill) => {
-    setSkills(skills.filter((s) => s !== skill))
-  }
-
   const handleContactInfo = (e) => {
     const contact = contactInfo[e.target.name]
     setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
   }
 
-  const deleteWork = (id) => {
-    const filteredWork = workExperience.filter((exp) => id !== exp.id)
-    setWorkExperience(filteredWork)
+  const initialState = {
+    work: generateWork(),
+    skills: ["React", "Javascript", "HTML", "CSS"],
+    education: generateEducation(),
+    projects: generateProject(),
   }
 
-  const editWorkExp = (id, updates) => {
-    const experiences = workExperience.filter((exp) => exp.id !== id)
-    const experienceToEdit = workExperience.filter((exp) => id === exp.id)[0]
-    experienceToEdit.edit(updates)
-    setWorkExperience([...experiences, experienceToEdit])
-  }
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <ModalContext.Provider value={{ ...modalShow, toggleModal }}>
-      <ResumeSheet>
-        <ResumeHeader
-          personalInfo={personalInfo}
-          handlePersonalInput={handlePersonalInput}
-        />
-        <ResumeContact
-          contactItems={contactInfo}
-          handleContactInfo={handleContactInfo}
-        />
-        <ResumeBody
-          addSkill={addSkill}
-          deleteSkill={deleteSkill}
-          deleteWork={deleteWork}
-          editWorkExp={editWorkExp}
-          addWorkExp={addWorkExperience}
-          addEducation={addEducation}
-          skills={skills}
-          workExperience={workExperience}
-          addProj={addProj}
-          projects={projects}
-          education={education}
-          sectionDisplay={sectionDisplay}
-        />
-      </ResumeSheet>
+      <ExperienceContext.Provider value={{ ...state, dispatch }}>
+        <ResumeSheet>
+          <ResumeHeader
+            personalInfo={personalInfo}
+            handlePersonalInput={handlePersonalInput}
+          />
+          <ResumeContact
+            contactItems={contactInfo}
+            handleContactInfo={handleContactInfo}
+          />
+          <ResumeBody
+            workExperience={state.work}
+            projects={state.projects}
+            education={state.education}
+            sectionDisplay={sectionDisplay}
+          />
+        </ResumeSheet>
+      </ExperienceContext.Provider>
     </ModalContext.Provider>
   )
 }

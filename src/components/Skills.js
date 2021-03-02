@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { Header, Button } from "./StyledUtils"
 import SkillBlock from "./SkillBlock"
 import SkillInput from "./SkillInput"
 import { ReactComponent as SkillAdd } from "../assets/add_circle-24px.svg"
+import { ExperienceContext } from "./context"
 
 const Container = styled.div`
   display: grid;
@@ -31,10 +32,10 @@ const SkillAddContainer = styled.div`
   }
 `
 
-export default function Skills({ addSkill, deleteSkill, skills }) {
+export default function Skills({ deleteSkill }) {
   const [displayAdd, setDisplayAdd] = useState(false)
   const [newSkill, setnewSkill] = useState("")
-
+  const { skills, dispatch } = useContext(ExperienceContext)
   // on click, change from a div to an input
 
   const handleDisplay = () => {
@@ -56,7 +57,7 @@ export default function Skills({ addSkill, deleteSkill, skills }) {
         setDisplayAdd(false)
         return
       }
-      addSkill(newSkill)
+      dispatch({ type: "add", key: "skills", payload: newSkill })
       setDisplayAdd(false)
       setnewSkill("")
     }

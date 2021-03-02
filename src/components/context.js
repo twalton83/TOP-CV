@@ -10,6 +10,13 @@ const ModalContext = React.createContext({
 })
 ModalContext.displayName = "Modal"
 
-const ExperienceContext = React.createContext()
+const ExperienceContext = React.createContext({
+  work: [],
+  education: [],
+  skills: [],
+  projects: [],
+  dispatch: () => { }
+})
+ExperienceContext.displayName = "Experience"
 
 export { ModalContext, ExperienceContext }

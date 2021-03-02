@@ -10,27 +10,34 @@ import {
   SaveButton,
 } from "./StyledUtils"
 import { ReactComponent as Close } from "../assets/close-24px.svg"
-import { ModalContext } from "./context"
+import { ModalContext, ExperienceContext } from "./context"
 
-export default function EducationModal({ addEducation, handleModal }) {
-  const [education, setEducation] = useState({
+export default function EducationModal() {
+  const [newEducation, setNewEducation] = useState({
     name: "",
     startDate: "",
     endDate: "",
     degree: "",
   })
+  const { education, dispatch } = useContext(ExperienceContext)
 
   const { toggleModal } = useContext(ModalContext)
+
   const handleClick = (e) => {
-    const { name, startDate, endDate, degree } = education
+    const { name, startDate, endDate, degree } = newEducation
     toggleModal(e)
-    const school = new Education(name, startDate, endDate, degree)
-    addEducation(school)
+    const school = new Education(
+      name,
+      new Date(startDate),
+      new Date(endDate),
+      degree
+    )
+    dispatch({ type: "add", key: "education", payload: school })
   }
 
   const handleChange = (e) => {
-    setEducation({
-      ...education,
+    setNewEducation({
+      ...newEducation,
       [e.target.name]: e.target.value,
     })
   }
@@ -50,7 +57,7 @@ export default function EducationModal({ addEducation, handleModal }) {
               name="name"
               id="name"
               placeholder="Name"
-              value={education.name}
+              value={newEducation.name}
               onChange={handleChange}
               required
             />
@@ -61,7 +68,7 @@ export default function EducationModal({ addEducation, handleModal }) {
               type="date"
               name="startDate"
               id="startDate"
-              value={education.startDate}
+              value={newEducation.startDate}
               onChange={handleChange}
               required
             />
@@ -72,13 +79,17 @@ export default function EducationModal({ addEducation, handleModal }) {
               type="date"
               name="endDate"
               id="endDate"
-              value={education.endDate}
+              value={newEducation.endDate}
               onChange={handleChange}
             />
           </label>
           <label htmlFor="degree">
             Degree Type:
-            <select value={education.degree} onBlur={handleChange}>
+            <select
+              name="degree"
+              value={newEducation.degree}
+              onBlur={handleChange}
+            >
               <option value="High School Diploma">High School Diploma</option>
               <option value="Bachelors">Bachelors</option>
               <option value="Masters">Masters</option>
@@ -86,7 +97,7 @@ export default function EducationModal({ addEducation, handleModal }) {
             </select>
           </label>
         </InputContainer>
-        <SaveButton id="education" onClick={handleClick}>
+        <SaveButton data-modal="education" onClick={handleClick}>
           Save
         </SaveButton>
       </Dialog>
