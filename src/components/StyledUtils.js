@@ -31,20 +31,20 @@ const Header = styled.h3`
 const ModalHeader = styled.h2``
 
 const Modal = styled.div`
-  z-index: 1;
-  width: 100vw;
-  height: 100%;
-  margin: 0;
-  min-height: 107vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0;
+  z-index: 10;
+  position: fixed;
   left: 0;
+  right: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
 `
 
 const Dialog = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 20;
   width: auto;
   max-width: 30vw;
   height: 50%;

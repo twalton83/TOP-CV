@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { Button, Header, InfoContainer } from "./StyledUtils"
-import WorkExperienceModal from "./WorkExperienceModal"
+import WorkExperienceModal from "./modals/WorkExperienceModal"
 import WorkExperienceItem from "./WorkExperienceItem"
 import { ModalContext, ExperienceContext } from "./context"
 
