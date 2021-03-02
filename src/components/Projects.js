@@ -34,12 +34,6 @@ export default function Projects() {
     tasks: [],
   })
 
-  const handleChange = (e) => {
-    setExp({
-      ...exp,
-      [e.target.name]: e.target.value,
-    })
-  }
   // implement enter press to add task
   const handleSubmit = (e) => {
     e.persist()

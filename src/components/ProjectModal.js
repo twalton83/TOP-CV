@@ -19,7 +19,7 @@ export default function ProjectModal() {
     endDate: "",
     currentTask: "",
   })
-  const { modalShow, toggleModal } = useContext(ModalContext)
+  const { toggleModal } = useContext(ModalContext)
 
   const handleClick = (e) => {
     const { name, startDate, endDate, currentTask } = proj
