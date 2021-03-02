@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 import { Header, Button } from "./StyledUtils"
 import SkillBlock from "./SkillBlock"
 import SkillInput from "./SkillInput"
@@ -57,7 +58,11 @@ export default function Skills({ deleteSkill }) {
         setDisplayAdd(false)
         return
       }
-      dispatch({ type: "add", key: "skills", payload: newSkill })
+      dispatch({
+        type: "add",
+        key: "skills",
+        payload: { name: newSkill, id: uuidv4() },
+      })
       setDisplayAdd(false)
       setnewSkill("")
     }
@@ -69,7 +74,7 @@ export default function Skills({ deleteSkill }) {
       <SkillBlockContainer onClick={handleDisplay}>
         {skills.map((skill) => (
           <SkillBlock
-            handleDelete={handleSkillDelete}
+            key={skill.id}
             skill={skill}
             bgcolor="#989da6"
             color="#FFF"

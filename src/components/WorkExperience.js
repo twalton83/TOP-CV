@@ -3,21 +3,15 @@ import styled from "styled-components"
 import { Button, Header, InfoContainer } from "./StyledUtils"
 import WorkExperienceModal from "./WorkExperienceModal"
 import WorkExperienceItem from "./WorkExperienceItem"
-import { ModalContext } from "./context"
+import { ModalContext, ExperienceContext } from "./context"
 
-export default function WorkExperience({
-  addWorkExp,
-  editWork,
-  workExperience,
-  deleteWork,
-}) {
+export default function WorkExperience({ editWork, deleteWork }) {
+  const { workExperience, dispatch } = useContext(ExperienceContext)
+
   const [editMode, setEditMode] = useState(false)
 
   const [experienceToEdit, setExperienceToEdit] = useState(null)
   const { workShow, toggleModal } = useContext(ModalContext)
-  const handleDelete = (e) => {
-    deleteWork(e.currentTarget.dataset.workid)
-  }
 
   const handleClose = (e) => {
     if (!e.target.classList.contains("close")) return
@@ -41,9 +35,9 @@ export default function WorkExperience({
       <Header color="#284B63">WORK EXPERIENCE</Header>
       {workExperience.map((exp) => (
         <WorkExperienceItem
-          handleDelete={handleDelete}
           handleEditClick={handleEditClick}
           experience={exp}
+          key={exp.id}
         />
       ))}
       <Button data-modal="work" onClick={toggleModal}>
@@ -54,7 +48,6 @@ export default function WorkExperience({
           editMode={editMode}
           editWork={editWork}
           experience={experienceToEdit}
-          addWorkExp={addWorkExp}
           handleClose={handleClose}
         />
       )}

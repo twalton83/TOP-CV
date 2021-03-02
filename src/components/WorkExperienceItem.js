@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { format } from "date-fns"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
+import { ExperienceContext } from "./context"
 
 const WorkHeader = styled.p`
   font-size: 1.4rem;
@@ -26,12 +27,9 @@ const Tasks = styled.ul`
   font-size: 1rem;
   padding-left: 20px;
 `
-export default function WorkExperienceItem({
-  experience,
-  handleDelete,
-  handleEditClick,
-}) {
+export default function WorkExperienceItem({ experience, handleEditClick }) {
   const [displayActions, setDisplayActions] = useState(false)
+  const { workExperience, dispatch } = useContext(ExperienceContext)
 
   const handleMouseOver = (e) => {
     e.stopPropagation()
@@ -66,7 +64,13 @@ export default function WorkExperienceItem({
           <Delete
             data-workid={experience.id}
             style={{ fill: "red" }}
-            onClick={handleDelete}
+            onClick={() =>
+              dispatch({
+                type: "delete",
+                key: "workExperience",
+                payload: experience,
+              })
+            }
           />
           <Edit
             data-workid={experience.id}

@@ -5,7 +5,7 @@ import { Header, Button } from "./StyledUtils"
 import EducationModal from "./EducationModal"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
-import { ModalContext } from "./context"
+import { ModalContext, ExperienceContext } from "./context"
 
 const EducationHeader = styled.p`
   font-size: 1.2rem;
@@ -15,12 +15,8 @@ const Dates = styled.em`
   font-size: 1rem;
 `
 
-export default function Education({
-  addEducation,
-  displayModal,
-  handleModal,
-  education,
-}) {
+export default function Education({ addEducation, handleModal }) {
+  const { education, dispatch } = useContext(ExperienceContext)
   const { educationShow, toggleModal } = useContext(ModalContext)
   const [displayActions, setDisplayActions] = useState(true)
   const [editMode, setEditMode] = useState(false)
@@ -37,10 +33,6 @@ export default function Education({
     setDisplayActions(false)
   }
 
-  const handleDelete = (e) => {
-    console.log("delete")
-  }
-
   const handleEditClick = (e) => {
     e.stopPropagation()
     const experience = education.filter(
@@ -54,7 +46,7 @@ export default function Education({
     <div>
       <Header color="#284B63">EDUCATION </Header>
       {education.map((edu) => (
-        <div>
+        <div key={edu.id}>
           <EducationHeader>{edu.name.toUpperCase()}</EducationHeader>
           {edu.startDate && (
             <Dates>
@@ -66,9 +58,14 @@ export default function Education({
           {displayActions && (
             <div>
               <Delete
-                data-eduid={edu.id}
                 style={{ fill: "red" }}
-                onClick={handleDelete}
+                onClick={() =>
+                  dispatch({
+                    type: "delete",
+                    key: "education",
+                    payload: edu,
+                  })
+                }
               />
               <Edit
                 data-eduid={edu.id}

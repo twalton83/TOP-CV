@@ -2,8 +2,8 @@ function addItem(state, key, item) {
   return { ...state, [key]: [...state[key], item] }
 }
 
-function deleteItem(state, { id }) {
-  return state.filter((item) => item.id !== id)
+function deleteItem(state, key, { id }) {
+  return { ...state, [key]: state[key].filter((item) => item.id !== id) }
 }
 
 function editItem(state, { id, edits }) {
@@ -14,15 +14,13 @@ function editItem(state, { id, edits }) {
 }
 
 function reducer(state, action) {
-  console.log(action, " - action")
   const { type, key, payload } = action
   switch (type) {
     case "add": {
-      console.log("add")
       return addItem(state, key, payload)
     }
     case "delete": {
-      return deleteItem(state, payload)
+      return deleteItem(state, key, payload)
     }
     case "edit": {
       return editItem(state, payload)

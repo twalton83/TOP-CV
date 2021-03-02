@@ -11,7 +11,7 @@ const ModalContext = React.createContext({
 ModalContext.displayName = "Modal"
 
 const ExperienceContext = React.createContext({
-  work: [],
+  workExperience: [],
   education: [],
   skills: [],
   projects: [],

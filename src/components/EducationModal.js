@@ -19,7 +19,7 @@ export default function EducationModal() {
     endDate: "",
     degree: "",
   })
-  const { education, dispatch } = useContext(ExperienceContext)
+  const { dispatch } = useContext(ExperienceContext)
 
   const { toggleModal } = useContext(ModalContext)
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ReactComponent as Company } from "../assets/domain-24px.svg"
@@ -12,6 +12,7 @@ import {
   SaveButton,
   DatePicker,
 } from "./StyledUtils"
+import { ModalContext, ExperienceContext } from "./context"
 
 const DateWrapper = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ export default function WorkExperienceModal({
   editMode,
   editWork,
 }) {
+  const { dispatch } = useContext(ExperienceContext)
   const [displayAdd, setDisplayAdd] = useState(true)
 
   const [exp, setExp] = useState(
@@ -46,10 +48,8 @@ export default function WorkExperienceModal({
   )
 
   const handleClick = (e) => {
-    // if editMode
     if (editMode) {
       // set up project to parent state and return
-      console.log("edit mode")
       editWork(e.currentTarget.dataset.id, exp)
       handleClose(e)
       return
@@ -60,11 +60,11 @@ export default function WorkExperienceModal({
     const newExperience = new WorkExperience(
       company,
       title,
-      startDate,
-      endDate,
+      new Date(startDate),
+      new Date(endDate),
       tasks
     )
-    addWorkExp(newExperience)
+    dispatch({ type: "add", key: "workExperience", payload: newExperience })
   }
 
   const handleChange = (e) => {

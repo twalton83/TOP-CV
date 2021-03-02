@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 import ResumeHeader from "./ResumeHeader"
 import ResumeContact from "./ResumeContact"
 import ResumeBody from "./ResumeBody"
@@ -76,8 +77,13 @@ export default function MyDocument() {
   }
 
   const initialState = {
-    work: generateWork(),
-    skills: ["React", "Javascript", "HTML", "CSS"],
+    workExperience: generateWork(),
+    skills: [
+      { name: "React", id: uuidv4() },
+      { name: "Javascript", id: uuidv4() },
+      { name: "HTML", id: uuidv4() },
+      { name: "CSS", id: uuidv4() },
+    ],
     education: generateEducation(),
     projects: generateProject(),
   }

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { format } from "date-fns"
+import { v4 as uuidv4 } from "uuid"
 import ProjectModal from "./ProjectModal"
 import { Header, Button } from "./StyledUtils"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
-import { ModalContext } from "./context"
+import { ModalContext, ExperienceContext } from "./context"
 
 const ProjectHeader = styled.p`
   font-size: 1.2rem;
@@ -19,7 +20,8 @@ const Tasks = styled.ul`
   font-size: 1rem;
 `
 
-export default function Projects({ addProj, projects }) {
+export default function Projects() {
+  const { projects, dispatch } = useContext(ExperienceContext)
   const [displayAdd, setDisplayAdd] = useState(true)
   const [displayActions, setDisplayActions] = useState(true)
   const { projectShow, toggleModal } = useContext(ModalContext)
@@ -55,19 +57,11 @@ export default function Projects({ addProj, projects }) {
     }
   }
 
-  const handleDelete = (e) => {
-    console.log("delete")
-  }
-
-  const handleEditClick = (e) => {
-    console.log("edit")
-  }
-
   return (
     <div>
       <Header color="#284B63">PROJECTS</Header>
       {projects.map((proj) => (
-        <div>
+        <div key={proj.id}>
           <ProjectHeader>{proj.name.toUpperCase()}</ProjectHeader>
           {proj.startDate && (
             <Dates>
@@ -78,22 +72,23 @@ export default function Projects({ addProj, projects }) {
           {proj.tasks.length && (
             <Tasks>
               {proj.tasks.map((t) => (
-                <li>{t}</li>
+                <li key={uuidv4()}>{t}</li>
               ))}
             </Tasks>
           )}
           {displayActions && (
             <div>
               <Delete
-                data-eduid={proj.id}
                 style={{ fill: "red" }}
-                onClick={handleDelete}
+                onClick={() =>
+                  dispatch({
+                    type: "delete",
+                    key: "projects",
+                    payload: proj,
+                  })
+                }
               />
-              <Edit
-                data-eduid={proj.id}
-                data-modal="work"
-                onClick={handleEditClick}
-              />
+              <Edit data-projid={proj.id} data-modal="work" />
             </div>
           )}
         </div>
@@ -101,7 +96,7 @@ export default function Projects({ addProj, projects }) {
       <Button data-modal="project" onClick={toggleModal}>
         ADD A PROJECT
       </Button>
-      {projectShow && <ProjectModal addProj={addProj} />}
+      {projectShow && <ProjectModal />}
     </div>
   )
 }

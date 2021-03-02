@@ -9,9 +9,10 @@ import {
   SaveButton,
 } from "./StyledUtils"
 import { ReactComponent as Close } from "../assets/close-24px.svg"
-import { ModalContext } from "./context"
+import { ModalContext, ExperienceContext } from "./context"
 
-export default function ProjectModal({ addProj, handleModal }) {
+export default function ProjectModal() {
+  const { projects, dispatch } = useContext(ExperienceContext)
   const [proj, setProj] = useState({
     name: "",
     startDate: "",
@@ -23,8 +24,10 @@ export default function ProjectModal({ addProj, handleModal }) {
   const handleClick = (e) => {
     const { name, startDate, endDate, currentTask } = proj
     toggleModal(e)
-    const project = new Project(name, startDate, endDate, [currentTask])
-    addProj(project)
+    const project = new Project(name, new Date(startDate), new Date(endDate), [
+      currentTask,
+    ])
+    dispatch({ type: "add", key: "projects", payload: project })
   }
 
   const handleChange = (e) => {

@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
+import { ExperienceContext } from "./context"
 
 const Block = styled.div`
   box-sizing: border-box;
@@ -31,8 +32,19 @@ const Block = styled.div`
   }
 `
 
-export default function SkillBlock({ handleDelete, skill, bgcolor, color }) {
+export default function SkillBlock({ skill, bgcolor, color }) {
   const [displayBadge, setDisplayBadge] = useState(false)
+  const { skills, dispatch } = useContext(ExperienceContext)
+
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    dispatch({
+      type: "delete",
+      key: "skills",
+      payload: { id: e.target.dataset.skill },
+    })
+  }
+
   return (
     <Block
       onMouseEnter={() => setDisplayBadge(true)}
@@ -43,14 +55,14 @@ export default function SkillBlock({ handleDelete, skill, bgcolor, color }) {
       {displayBadge && (
         <button
           type="button"
-          data-skill={skill}
+          data-skill={skill.id}
           className="badge"
           onClick={handleDelete}
         >
           X
         </button>
       )}
-      <p>{skill}</p>
+      <p>{skill.name}</p>
     </Block>
   )
 }
