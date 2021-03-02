@@ -12,18 +12,30 @@ import {
 import { ReactComponent as Close } from "../assets/close-24px.svg"
 import { ModalContext, ExperienceContext } from "./context"
 
-export default function EducationModal() {
-  const [newEducation, setNewEducation] = useState({
-    name: "",
-    startDate: "",
-    endDate: "",
-    degree: "",
-  })
+export default function EducationModal({ handleClose, editMode, experience }) {
+  const [newEducation, setNewEducation] = useState(
+    experience || {
+      name: "",
+      startDate: "",
+      endDate: "",
+      degree: "",
+    }
+  )
   const { dispatch } = useContext(ExperienceContext)
 
   const { toggleModal } = useContext(ModalContext)
 
   const handleClick = (e) => {
+    if (editMode) {
+      dispatch({
+        type: "edit",
+        key: "education",
+        payload: { id: experience.id, edits: newEducation },
+      })
+      handleClose(e)
+      return
+    }
+    if (newEducation.startDate === "" || newEducation.name === "") return
     const { name, startDate, endDate, degree } = newEducation
     toggleModal(e)
     const school = new Education(
@@ -97,7 +109,11 @@ export default function EducationModal() {
             </select>
           </label>
         </InputContainer>
-        <SaveButton data-modal="education" onClick={handleClick}>
+        <SaveButton
+          className="close"
+          data-modal="education"
+          onClick={handleClick}
+        >
           Save
         </SaveButton>
       </Dialog>

@@ -30,7 +30,6 @@ export default function WorkExperienceModal({
   experience,
   handleClose,
   editMode,
-  editWork,
 }) {
   const { dispatch } = useContext(ExperienceContext)
   const [displayAdd, setDisplayAdd] = useState(true)

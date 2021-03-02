@@ -7,7 +7,6 @@ function deleteItem(state, key, { id }) {
 }
 
 function editItem(state, key, { id, edits }) {
-  console.log(key, id)
   const itemToEdit = state[key].filter((item) => item.id === id)[0]
   const uneditedItems = state[key].filter((item) => item.id !== id)
   itemToEdit.edit(edits)

@@ -15,7 +15,7 @@ const Dates = styled.em`
   font-size: 1rem;
 `
 
-export default function Education({ addEducation, handleModal }) {
+export default function Education() {
   const { education, dispatch } = useContext(ExperienceContext)
   const { educationShow, toggleModal } = useContext(ModalContext)
   const [displayActions, setDisplayActions] = useState(true)
@@ -33,6 +33,13 @@ export default function Education({ addEducation, handleModal }) {
     setDisplayActions(false)
   }
 
+  const handleClose = (e) => {
+    if (!e.target.classList.contains("close")) return
+    toggleModal(e)
+    setEditMode(false)
+    setEducationToEdit(null)
+  }
+
   const handleEditClick = (e) => {
     e.stopPropagation()
     const experience = education.filter(
@@ -40,7 +47,7 @@ export default function Education({ addEducation, handleModal }) {
     )[0]
     setEditMode(true)
     setEducationToEdit(experience)
-    handleModal(e)
+    toggleModal(e)
   }
   return (
     <div>
@@ -69,7 +76,7 @@ export default function Education({ addEducation, handleModal }) {
               />
               <Edit
                 data-eduid={edu.id}
-                data-modal="work"
+                data-modal="education"
                 onClick={handleEditClick}
               />
             </div>
@@ -77,7 +84,11 @@ export default function Education({ addEducation, handleModal }) {
         </div>
       ))}
       {educationShow && (
-        <EducationModal addEducation={addEducation} handleModal={handleModal} />
+        <EducationModal
+          handleClose={handleClose}
+          editMode={editMode}
+          experience={educationToEdit}
+        />
       )}
       <Button data-modal="education" onClick={toggleModal}>
         ADD EDUCATION
