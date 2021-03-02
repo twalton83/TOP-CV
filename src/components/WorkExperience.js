@@ -5,7 +5,7 @@ import WorkExperienceModal from "./WorkExperienceModal"
 import WorkExperienceItem from "./WorkExperienceItem"
 import { ModalContext, ExperienceContext } from "./context"
 
-export default function WorkExperience({ editWork, deleteWork }) {
+export default function WorkExperience() {
   const { workExperience, dispatch } = useContext(ExperienceContext)
 
   const [editMode, setEditMode] = useState(false)
@@ -46,7 +46,6 @@ export default function WorkExperience({ editWork, deleteWork }) {
       {workShow && (
         <WorkExperienceModal
           editMode={editMode}
-          editWork={editWork}
           experience={experienceToEdit}
           handleClose={handleClose}
         />

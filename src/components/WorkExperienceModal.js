@@ -28,7 +28,6 @@ const TaskList = styled.ul`
 
 export default function WorkExperienceModal({
   experience,
-  addWorkExp,
   handleClose,
   editMode,
   editWork,
@@ -49,8 +48,11 @@ export default function WorkExperienceModal({
 
   const handleClick = (e) => {
     if (editMode) {
-      // set up project to parent state and return
-      editWork(e.currentTarget.dataset.id, exp)
+      dispatch({
+        type: "edit",
+        key: "workExperience",
+        payload: { id: experience.id, edits: exp },
+      })
       handleClose(e)
       return
     }

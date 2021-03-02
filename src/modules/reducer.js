@@ -7,10 +7,10 @@ function deleteItem(state, key, { id }) {
 }
 
 function editItem(state, key, { id, edits }) {
-  const itemToEdit = state.filter((item) => item.id === id)
-  const uneditedItems = state.filter((item) => item.id !== id)
+  console.log(key, id)
+  const itemToEdit = state[key].filter((item) => item.id === id)[0]
+  const uneditedItems = state[key].filter((item) => item.id !== id)
   itemToEdit.edit(edits)
-
   return { ...state, [key]: [...uneditedItems, itemToEdit] }
 }
 
@@ -24,7 +24,7 @@ function reducer(state, action) {
       return deleteItem(state, key, payload)
     }
     case "edit": {
-      return editItem(state, payload)
+      return editItem(state, key, payload)
     }
     default:
       return {
