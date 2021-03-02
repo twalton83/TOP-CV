@@ -11,17 +11,29 @@ import {
 import { ReactComponent as Close } from "../assets/close-24px.svg"
 import { ModalContext, ExperienceContext } from "./context"
 
-export default function ProjectModal() {
+export default function ProjectModal({ experience, editMode, handleClose }) {
   const { projects, dispatch } = useContext(ExperienceContext)
-  const [proj, setProj] = useState({
-    name: "",
-    startDate: "",
-    endDate: "",
-    currentTask: "",
-  })
+  const [proj, setProj] = useState(
+    experience || {
+      name: "",
+      startDate: "",
+      endDate: "",
+      currentTask: "",
+    }
+  )
   const { toggleModal } = useContext(ModalContext)
 
   const handleClick = (e) => {
+    if (editMode) {
+      dispatch({
+        type: "edit",
+        key: "projects",
+        payload: { id: experience.id, edits: proj },
+      })
+      handleClose(e)
+      return
+    }
+    if (!proj.name) return
     const { name, startDate, endDate, currentTask } = proj
     toggleModal(e)
     const project = new Project(name, new Date(startDate), new Date(endDate), [
@@ -88,7 +100,11 @@ export default function ProjectModal() {
             />
           </label>
         </InputContainer>
-        <SaveButton data-modal="project" onClick={handleClick}>
+        <SaveButton
+          className="close"
+          data-modal="project"
+          onClick={handleClick}
+        >
           Save
         </SaveButton>
       </Dialog>
