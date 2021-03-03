@@ -68,7 +68,7 @@ export default function ContactItemList({ items }) {
           key={item.value}
         >
           {item.svg}
-          <p> {item.value}</p>
+          <p data-modal="contact"> {item.value}</p>
         </ContactItem>
       ))}
     </List>
