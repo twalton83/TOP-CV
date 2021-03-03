@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
-import ContactModal from "./ContactModal"
+import ContactModal from "./modals/ContactModal"
 import ContactItemList from "./ContactItemList"
 import { Button } from "./StyledUtils"
 import { ModalContext } from "./context"
 
 const Section = styled.section`
   display: grid;
-  height: auto;
-  min-height: 10%;
+  height: 100%;
+  min-height: 15vh;
   grid-template-columns: ${(props) => props.cols};
   grid-template-rows: ${(props) => props.rows};
   border-top: 2px solid ${(props) => props.color};
@@ -26,7 +26,11 @@ export default function ResumeContact({ contactItems, handleContactInfo }) {
   return (
     <Section>
       {noItems && (
-        <Button data-modal="contact" onClick={toggleModal}>
+        <Button
+          style={{ marginTop: "50px" }}
+          data-modal="contact"
+          onClick={toggleModal}
+        >
           ADD CONTACTS
         </Button>
       )}

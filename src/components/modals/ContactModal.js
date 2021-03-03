@@ -1,28 +1,20 @@
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
-import { ReactComponent as Email } from "../assets/email-24px.svg"
-import { ReactComponent as Phone } from "../assets/smartphone-24px.svg"
-import { ReactComponent as Address } from "../assets/location_on-24px.svg"
-import { ReactComponent as Website } from "../assets/language-24px.svg"
-import { ReactComponent as Country } from "../assets/flag-24px.svg"
-import { ReactComponent as City } from "../assets/domain-24px.svg"
-import { ReactComponent as LinkedIn } from "../assets/linkedin.svg"
-import { ReactComponent as StackOverflow } from "../assets/stack-overflow.svg"
-import { ReactComponent as Github } from "../assets/github-logo.svg"
-import { ModalContext } from "./context"
+import { ReactComponent as Email } from "../../assets/email-24px.svg"
+import { ReactComponent as Phone } from "../../assets/smartphone-24px.svg"
+import { ReactComponent as Address } from "../../assets/location_on-24px.svg"
+import { ReactComponent as Website } from "../../assets/language-24px.svg"
+import { ReactComponent as Country } from "../../assets/flag-24px.svg"
+import { ReactComponent as City } from "../../assets/domain-24px.svg"
+import { ReactComponent as LinkedIn } from "../../assets/linkedin.svg"
+import { ReactComponent as StackOverflow } from "../../assets/stack-overflow.svg"
+import { ReactComponent as Github } from "../../assets/github-logo.svg"
+import { ModalContext } from "../context"
 
-const Modal = styled.div`
-  z-index: 10;
-  width: 100vw;
-  height: 100%;
-  min-height: 107vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0;
-  left: 0;
-`
+import { Modal } from "../StyledUtils"
 
 const Dialog = styled.div`
+  position: relative;
   width: 60%;
   height: 40%;
   background-color: #394554;
@@ -96,15 +88,17 @@ const InputContainer = styled.div`
 `
 
 const SaveButton = styled.button`
+  position: absolute;
   width: 100px;
   height: 40px;
   background-color: #1cbfaf;
   border-radius: 30px;
   border: none;
-  margin-left: 85%;
   color: white;
   font-weight: 600;
   font-size: 1.1rem;
+  right: 16px;
+  bottom: 16px;
 `
 
 export default function ContactModal({ contactInfo, handleContactInfo }) {
