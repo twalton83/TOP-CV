@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { ExperienceContext } from "./context"
+import SkillInput from './SkillInput';
 
 const Block = styled.div`
   box-sizing: border-box;
@@ -34,7 +36,38 @@ const Block = styled.div`
 
 export default function SkillBlock({ skill, bgcolor, color }) {
   const [displayBadge, setDisplayBadge] = useState(false)
-  const { skills, dispatch } = useContext(ExperienceContext)
+  const { dispatch } = useContext(ExperienceContext)
+  const [displayInput, setDisplayInput] = useState(false)
+  const [prevSkill, setPrevSkill] = useState(skill.name);
+  const [editedSkill, setEditedSkill] = useState(skill.name);
+
+
+  const handleBlur = (e) => {
+    e.stopPropagation()
+    if (e.key === "Enter" || e.type === "blur") {
+      if (editedSkill === "") {
+        return
+      }
+      dispatch({
+        type: "editSkill",
+        key: "skills",
+        payload: { id: skill.id, edit: editedSkill },
+      })
+      setDisplayInput(false)
+      setEditedSkill("")
+    }
+  }
+
+  const handleClick = (e) => {
+    e.stopPropagation()
+    setDisplayInput(true)
+  }
+
+
+  const handleChange = (e) => {
+    setEditedSkill(e.target.value)
+  }
+
 
   const handleDelete = (e) => {
     e.stopPropagation()
@@ -46,23 +79,31 @@ export default function SkillBlock({ skill, bgcolor, color }) {
   }
 
   return (
-    <Block
-      onMouseEnter={() => setDisplayBadge(true)}
-      onMouseLeave={() => setDisplayBadge(false)}
-      bgcolor={bgcolor}
-      color={color}
-    >
-      {displayBadge && (
-        <button
-          type="button"
-          data-skill={skill.id}
-          className="badge"
-          onClick={handleDelete}
+    <div>
+      {!displayInput &&
+        <Block
+          onMouseEnter={() => setDisplayBadge(true)}
+          onMouseLeave={() => setDisplayBadge(false)}
+          onClick={handleClick}
+          bgcolor={bgcolor}
+          color={color}
         >
-          X
-        </button>
-      )}
-      <p>{skill.name}</p>
-    </Block>
+          {displayBadge && (
+            <button
+              type="button"
+              data-skill={skill.id}
+              className="badge"
+              onClick={handleDelete}
+            >
+              X
+            </button>
+          )}
+          <p>{skill.name}</p>
+        </Block>
+      }
+      {displayInput &&
+        <SkillInput handleChange={handleChange} handleSubmit={handleBlur} bgcolor="#989da6"
+          color="#FFF" type="text" skill={editedSkill} />}
+    </div>
   )
 }

@@ -13,6 +13,16 @@ function editItem(state, key, { id, edits }) {
   return { ...state, [key]: [...uneditedItems, itemToEdit] }
 }
 
+function editSkills(state, { id, edit }) {
+  const skills = state.skills.map((skill) => {
+    if (skill.id === id) {
+      skill.name = edit
+    }
+    return skill
+  })
+  return { ...state, skills: [...skills] }
+}
+
 function reducer(state, action) {
   const { type, key, payload } = action
   switch (type) {
@@ -24,6 +34,9 @@ function reducer(state, action) {
     }
     case "edit": {
       return editItem(state, key, payload)
+    }
+    case "editSkill": {
+      return editSkills(state, payload)
     }
     default:
       return {

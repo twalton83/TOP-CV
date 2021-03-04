@@ -25,8 +25,6 @@ export default function SkillInput({
   handleChange,
   handleSubmit,
 }) {
-  // const [updatedSkill, setUpdatedSkill] = useState("");
-
   return (
     <Input
       onBlur={handleSubmit}
