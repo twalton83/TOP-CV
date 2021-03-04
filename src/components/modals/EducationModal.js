@@ -24,7 +24,8 @@ export default function EducationModal({ handleClose, editMode, experience }) {
 
   const { toggleModal } = useContext(ModalContext)
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     if (editMode) {
       dispatch({
         type: "edit",
@@ -36,7 +37,7 @@ export default function EducationModal({ handleClose, editMode, experience }) {
     }
     if (newEducation.startDate === "" || newEducation.name === "") return
     const { name, startDate, endDate, degree } = newEducation
-    toggleModal(e)
+
     const school = new Education(
       name,
       new Date(startDate),
@@ -44,6 +45,7 @@ export default function EducationModal({ handleClose, editMode, experience }) {
       degree
     )
     dispatch({ type: "add", key: "education", payload: school })
+    toggleModal(e)
   }
 
   const handleChange = (e) => {
@@ -67,61 +69,59 @@ export default function EducationModal({ handleClose, editMode, experience }) {
         <div>
           <ModalHeader>EDUCATION</ModalHeader>
         </div>
-        <InputContainer>
-          <label htmlFor="name">
-            <Company />
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              value={newEducation.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="startDate">
-            Start Date:
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              value={newEducation.startDate}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="endDate">
-            End Date:
-            <input
-              type="date"
-              name="endDate"
-              id="endDate"
-              value={newEducation.endDate}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="degree">
-            Degree Type:
-            <select
-              name="degree"
-              value={newEducation.degree}
-              onBlur={handleChange}
-            >
-              <option value="High School Diploma">High School Diploma</option>
-              <option value="Bachelors">Bachelors</option>
-              <option value="Masters">Masters</option>
-              <option value="Certificate">Certificate</option>
-            </select>
-          </label>
-        </InputContainer>
-        <SaveButton
-          className="close"
-          data-modal="education"
-          onClick={handleClick}
-        >
-          Save
-        </SaveButton>
+        <form onSubmit={handleSubmit} data-modal="education">
+          <InputContainer>
+            <label htmlFor="name">
+              <Company />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+                value={newEducation.name}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label htmlFor="startDate">
+              Start:
+              <input
+                type="date"
+                name="startDate"
+                id="startDate"
+                value={newEducation.startDate}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label htmlFor="endDate">
+              End:
+              <input
+                type="date"
+                name="endDate"
+                id="endDate"
+                value={newEducation.endDate}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="degree">
+              Degree Type:
+              <select
+                name="degree"
+                value={newEducation.degree}
+                onBlur={handleChange}
+              >
+                <option value="High School Diploma">High School Diploma</option>
+                <option value="Bachelors">Bachelors</option>
+                <option value="Masters">Masters</option>
+                <option value="Certificate">Certificate</option>
+              </select>
+            </label>
+          </InputContainer>
+          <SaveButton type="submit" className="close" data-modal="education">
+            Save
+          </SaveButton>
+        </form>
       </Dialog>
     </Modal>
   )

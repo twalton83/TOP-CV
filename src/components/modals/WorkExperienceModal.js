@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ReactComponent as Company } from "../../assets/domain-24px.svg"
+import { ReactComponent as Title } from "../../assets/assignment_ind-24px.svg"
+import { ReactComponent as Tasks } from "../../assets/view_list-24px.svg"
 import WorkExperience from "../../modules/WorkExperience"
 import {
   Modal,
@@ -117,17 +119,21 @@ export default function WorkExperienceModal({
               required
             />
           </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Title/Position"
-            value={exp.title}
-            onChange={handleChange}
-            required
-          />
+          <label htmlFor="title">
+            <Title />
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title/Position"
+              value={exp.title}
+              onChange={handleChange}
+              required
+            />
+          </label>
           <DateWrapper>
             <label htmlFor="startDate">
+              <strong>Start Date:</strong>
               <input
                 type="date"
                 name="startDate"
@@ -139,6 +145,7 @@ export default function WorkExperienceModal({
             </label>
             <strong>-</strong>
             <label htmlFor="endDate">
+              End Date:
               <input
                 type="date"
                 name="endDate"

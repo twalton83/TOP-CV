@@ -46,7 +46,7 @@ const Dialog = styled.div`
   position: relative;
   z-index: 20;
   width: auto;
-  max-width: 30vw;
+  max-width: 50vw;
   height: 50%;
   background-color: #394554;
   color: white;
