@@ -60,7 +60,11 @@ export default function Projects() {
     <div>
       <Header color="#284B63">PROJECTS</Header>
       {projects.map((proj) => (
-        <ProjectItem proj={proj} handleEditClick={handleEditClick} />
+        <ProjectItem
+          key={proj.id}
+          proj={proj}
+          handleEditClick={handleEditClick}
+        />
       ))}
       <Button data-modal="project" onClick={toggleModal}>
         ADD A PROJECT

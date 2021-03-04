@@ -57,7 +57,9 @@ export default function WorkExperienceItem({ experience, handleEditClick }) {
       </Dates>
       <Tasks>
         {experience.tasks.map((t) => (
-          <li key={uuidv4()}>{t}</li>
+          <li key={uuidv4()}>
+            <p>{t}</p>
+          </li>
         ))}
       </Tasks>
       {displayActions && (

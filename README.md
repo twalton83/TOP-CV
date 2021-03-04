@@ -7,7 +7,8 @@ To run this project, clone the repository and run `yarn start`.
 - [X] Refactor to use `useReducer`, context, and break out more custom hooks where necessary
 - [ ] Implement React-to-PDF
 - [ ] Finish styling 
-- [ ] Resolve reshuffling of items in array when editing new item
+- [X] Resolve reshuffling of items in array when editing new item
+- [ ] Change date pickers to dropdowns or date picker npm package
 
 ## Icon Attribution
 

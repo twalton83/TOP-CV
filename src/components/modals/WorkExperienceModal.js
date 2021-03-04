@@ -29,6 +29,23 @@ const DateWrapper = styled.div`
 const TaskList = styled.ul`
   margin-top: 0;
   width: 80%;
+  li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      height: 24px;
+      width: 24px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
   li > input {
     width: 100%;
   }
@@ -99,6 +116,19 @@ export default function WorkExperienceModal({
       setDisplayAdd(false)
     }
   }
+
+  const handleTaskDelete = (e) => {
+    console.log(e.target.previousSibling)
+    const tasks = experience.tasks.filter(
+      (task) => task !== e.target.previousSibling.textContent
+    )
+    console.log(tasks)
+    setExp({
+      ...exp,
+      tasks,
+    })
+  }
+
   return (
     <Modal className="close" onClick={handleClose}>
       <Dialog>
@@ -145,7 +175,6 @@ export default function WorkExperienceModal({
                 type="date"
                 name="startDate"
                 id="startDate"
-                value={exp.startDate}
                 onChange={handleChange}
                 required
               />
@@ -156,7 +185,6 @@ export default function WorkExperienceModal({
                 type="date"
                 name="endDate"
                 id="endDate"
-                value={exp.endDate}
                 onChange={handleChange}
               />
             </label>
@@ -164,7 +192,12 @@ export default function WorkExperienceModal({
           <strong>Tasks and Achievements:</strong>
           <TaskList>
             {exp.tasks.map((task) => (
-              <li key={uuidv4()}>{task}</li>
+              <li key={uuidv4()}>
+                <p>{task}</p>
+                <button type="button" onClick={handleTaskDelete}>
+                  X
+                </button>
+              </li>
             ))}
             <li>
               <input

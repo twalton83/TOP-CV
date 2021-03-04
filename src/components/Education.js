@@ -33,7 +33,11 @@ export default function Education() {
     <div>
       <Header color="#284B63">EDUCATION </Header>
       {education.map((edu) => (
-        <EducationItem edu={edu} handleEditClick={handleEditClick} />
+        <EducationItem
+          key={edu.id}
+          edu={edu}
+          handleEditClick={handleEditClick}
+        />
       ))}
       {educationShow && (
         <EducationModal
