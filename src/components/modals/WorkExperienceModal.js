@@ -100,7 +100,7 @@ export default function WorkExperienceModal({
       [e.target.name]: e.target.value,
     })
   }
-  // implement enter press to add task
+
   const handleTaskSubmit = (e) => {
     e.persist()
     if (e.key === "Enter" || e.type === "blur") {
