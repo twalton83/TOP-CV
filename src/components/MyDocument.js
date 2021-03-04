@@ -4,11 +4,6 @@ import { v4 as uuidv4 } from "uuid"
 import ResumeHeader from "./ResumeHeader"
 import ResumeContact from "./ResumeContact"
 import ResumeBody from "./ResumeBody"
-import {
-  generateWork,
-  generateEducation,
-  generateProject,
-} from "../modules/seeds"
 import { ModalContext, ExperienceContext } from "./context"
 import reducer from "../modules/reducer"
 
@@ -77,15 +72,10 @@ export default function MyDocument() {
   }
 
   const initialState = {
-    workExperience: generateWork(),
-    skills: [
-      { name: "React", id: uuidv4() },
-      { name: "Javascript", id: uuidv4() },
-      { name: "HTML", id: uuidv4() },
-      { name: "CSS", id: uuidv4() },
-    ],
-    education: generateEducation(),
-    projects: generateProject(),
+    workExperience: [],
+    skills: [],
+    education: [],
+    projects: [],
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
