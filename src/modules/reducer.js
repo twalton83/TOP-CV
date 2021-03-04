@@ -7,10 +7,13 @@ function deleteItem(state, key, { id }) {
 }
 
 function editItem(state, key, { id, edits }) {
-  const itemToEdit = state[key].filter((item) => item.id === id)[0]
-  const uneditedItems = state[key].filter((item) => item.id !== id)
-  itemToEdit.edit(edits)
-  return { ...state, [key]: [...uneditedItems, itemToEdit] }
+  const items = state[key].map((item) => {
+    if (item.id === id) {
+      item.edit(edits)
+    }
+    return item
+  })
+  return { ...state, [key]: items }
 }
 
 function editSkills(state, { id, edit }) {

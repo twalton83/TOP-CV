@@ -51,7 +51,7 @@ const Dialog = styled.div`
   background-color: #394554;
   color: white;
   margin: 0 auto;
-  margin-top: 20%;
+  margin-top: 10%;
   border-radius: 20px;
   display: grid;
   grid-template-columns: 100%;

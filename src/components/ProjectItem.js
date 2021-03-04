@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { v4 as uuidv4 } from "uuid"
 import styled from "styled-components"
-import { format } from "date-fns"
+import { format, isValid } from "date-fns"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
 import { ExperienceContext } from "./context"
@@ -41,8 +41,8 @@ export default function ProjectItem({ proj, handleEditClick }) {
       <ProjectHeader>{proj.name.toUpperCase()}</ProjectHeader>
       {proj.startDate && (
         <Dates>
-          {format(proj.startDate, "P")} -
-          {format(proj.endDate, "P") || "Current"}
+          {isValid(proj.startDate) && format(proj.startDate, "P")} -{" "}
+          {(isValid(proj.endDate) && format(proj.endDate, "P")) || "Current"}
         </Dates>
       )}
       {proj.tasks.length && (

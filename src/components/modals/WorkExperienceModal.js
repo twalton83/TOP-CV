@@ -19,9 +19,16 @@ const DateWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
+
+  input {
+    width: 50%;
+  }
 `
 
 const TaskList = styled.ul`
+  margin-top: 0;
+  width: 80%;
   li > input {
     width: 100%;
   }
@@ -143,9 +150,8 @@ export default function WorkExperienceModal({
                 required
               />
             </label>
-            <strong>-</strong>
             <label htmlFor="endDate">
-              End Date:
+              <strong>End Date:</strong>
               <input
                 type="date"
                 name="endDate"
@@ -155,7 +161,7 @@ export default function WorkExperienceModal({
               />
             </label>
           </DateWrapper>
-          <p>Tasks and Achievements:</p>
+          <strong>Tasks and Achievements:</strong>
           <TaskList>
             {exp.tasks.map((task) => (
               <li key={uuidv4()}>{task}</li>

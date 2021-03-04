@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
-import { format } from "date-fns"
+import { format, isValid } from "date-fns"
 import { ReactComponent as Edit } from "../assets/edit-24px.svg"
 import { ReactComponent as Delete } from "../assets/delete_forever-24px.svg"
 import { ExperienceContext } from "./context"
@@ -51,8 +51,9 @@ export default function WorkExperienceItem({ experience, handleEditClick }) {
       <WorkTitle>{experience.title}</WorkTitle>
       <WorkHeader>{experience.company}</WorkHeader>
       <Dates>
-        {format(experience.startDate, "P")} -{" "}
-        {format(experience.endDate, "P") || "Current"}
+        {isValid(experience.startDate) && format(experience.startDate, "P")} -{" "}
+        {(isValid(experience.endDate) && format(experience.endDate, "P")) ||
+          "Current"}
       </Dates>
       <Tasks>
         {experience.tasks.map((t) => (
