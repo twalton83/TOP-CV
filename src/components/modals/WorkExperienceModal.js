@@ -118,11 +118,9 @@ export default function WorkExperienceModal({
   }
 
   const handleTaskDelete = (e) => {
-    console.log(e.target.previousSibling)
     const tasks = experience.tasks.filter(
       (task) => task !== e.target.previousSibling.textContent
     )
-    console.log(tasks)
     setExp({
       ...exp,
       tasks,

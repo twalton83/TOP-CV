@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 import Project from "../../modules/Project"
 import {
   Modal,
@@ -9,6 +10,31 @@ import {
   SaveButton,
 } from "../StyledUtils"
 import { ModalContext, ExperienceContext } from "../context"
+
+const TaskList = styled.ul`
+  margin-top: 0;
+  width: 80%;
+  li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      height: 24px;
+      width: 24px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+  li > input {
+    width: 100%;
+  }
+`
 
 export default function ProjectModal({ experience, editMode, handleClose }) {
   const { projects, dispatch } = useContext(ExperienceContext)
@@ -22,6 +48,28 @@ export default function ProjectModal({ experience, editMode, handleClose }) {
   )
   const { toggleModal } = useContext(ModalContext)
 
+  const handleTaskSubmit = (e) => {
+    e.persist()
+    if (e.key === "Enter" || e.type === "blur") {
+      if (proj.currentTask === "") {
+        return
+      }
+      setProj({
+        ...proj,
+        currentTask: "",
+        tasks: [...proj.tasks, proj.currentTask],
+      })
+    }
+  }
+  const handleTaskDelete = (e) => {
+    const tasks = experience.tasks.filter(
+      (task) => task !== e.target.previousSibling.textContent
+    )
+    setProj({
+      ...proj,
+      tasks,
+    })
+  }
   const handleClick = (e) => {
     if (editMode) {
       dispatch({
@@ -96,15 +144,27 @@ export default function ProjectModal({ experience, editMode, handleClose }) {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="task">
-            <strong>-</strong>
-            <input
-              type="text"
-              name="currentTask"
-              value={proj.currentTask}
-              onChange={handleChange}
-            />
-          </label>
+          <TaskList>
+            {proj.tasks.map((task) => (
+              <li key={uuidv4()}>
+                <p>{task}</p>
+                <button type="button" onClick={handleTaskDelete}>
+                  X
+                </button>
+              </li>
+            ))}
+            <li>
+              <input
+                id="currentTask"
+                type="text"
+                name="currentTask"
+                value={proj.currentTask}
+                onChange={handleChange}
+                onKeyPress={handleTaskSubmit}
+                onBlur={handleTaskSubmit}
+              />
+            </li>
+          </TaskList>
         </InputContainer>
         <SaveButton
           className="close"
